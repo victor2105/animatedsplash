@@ -5,21 +5,26 @@ import { MyApp } from './app.component';
 
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
-import { HomePage } from '../pages/home/home';
+import { EntradaPage } from '../pages/entrada/entrada';
 import { TabsPage } from '../pages/tabs/tabs';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { SplashPage } from '../pages/splash/splash';
+import { EntradaProvider } from '../providers/entrada/entrada';
+import { SaidaProvider } from '../providers/saida/saida';
+import { EstatisticasProvider } from '../providers/estatisticas/estatisticas';
+import { GrupoComponent } from '../components/grupo/grupo';
 
 @NgModule({
   declarations: [
     MyApp,
     AboutPage,
     ContactPage,
-    HomePage,
+    EntradaPage,
     TabsPage,
-    SplashPage
+    SplashPage,
+    GrupoComponent
   ],
   imports: [
     BrowserModule,
@@ -30,14 +35,17 @@ import { SplashPage } from '../pages/splash/splash';
     MyApp,
     AboutPage,
     ContactPage,
-    HomePage,
+    EntradaPage,
     TabsPage,
     SplashPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    EntradaProvider,
+    SaidaProvider,
+    EstatisticasProvider
   ]
 })
 export class AppModule {}
