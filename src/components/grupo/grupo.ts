@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Grupo } from '../../models/grupo';
 import { CelulaComponent } from '../celula/celula';
+import { Celula } from '../../models/celula';
 
 /**
  * Generated class for the GrupoComponent component.
@@ -18,6 +19,13 @@ export class GrupoComponent {
 
   constructor() {
     console.log('Hello GrupoComponent Component');
+  }
+
+  novaCelula(){
+    let celula = new Celula();
+    celula.nome = "Nooo";
+    celula.valor = 1;
+    this.grupo.celulas.push(celula);
   }
 
 }

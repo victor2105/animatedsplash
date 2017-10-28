@@ -6,7 +6,7 @@
 
 <ion-content padding >
   <ion-slides loop>
-    <ion-slide>
+    <ion-slide *ngFor="let grupo of grupos">
       <grupo [grupo]="grupo"></grupo>
     </ion-slide>
     <ion-slide>

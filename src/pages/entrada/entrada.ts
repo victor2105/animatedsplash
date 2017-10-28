@@ -14,7 +14,7 @@ export class EntradaPage{
   @Input()
   center: boolean;
 
-  grupo: Grupo;
+  grupos: Grupo[];
 
 
 
@@ -28,17 +28,15 @@ export class EntradaPage{
   constructor(public navCtrl: NavController) {
     this.center = false;
 
-    let celula = new Celula();
-    celula.nome = "Salario";
-    celula.valor = 1000;
 
-    this.grupo = new Grupo();
-    this.grupo.nome = "Entradas Fixas";
-    this.grupo.celulas = [
-      celula,
-      celula
-    ];
+    this.grupos = [];
+    this.addGrupo();
   }
 
+  addGrupo(){
+    let grupo = new Grupo();
+    grupo.nome = "Novo grupo";
+    this.grupos.push(grupo);
+  }
 
 }
