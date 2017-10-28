@@ -1,6 +1,7 @@
 import { Component, ViewChild, Input } from '@angular/core';
 import { NavController, Slides } from 'ionic-angular';
 import { GrupoComponent } from '../../components/grupo/grupo';
+import { CelulaComponent} from '../../components/celula/celula';
 import { Grupo } from '../../models/grupo';
 import { Celula } from '../../models/celula';
 
@@ -34,6 +35,7 @@ export class EntradaPage{
     this.grupo = new Grupo();
     this.grupo.nome = "Entradas Fixas";
     this.grupo.celulas = [
+      celula,
       celula
     ];
   }

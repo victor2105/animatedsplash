@@ -1,16 +1,10 @@
-<ion-card class=" card card-group" color="secondary">
+<ion-card class="card card-group" color="primary">
   <ion-card-header>
     {{grupo.nome}}
   </ion-card-header>
   <ion-list>
-    <ion-card class="card little-card" color="light">
-      <ion-list>
-        <ion-item>
-          <ion-icon name="leaf" item-start></ion-icon>
-            Herbology
-          <ion-icon name="rose" item-end></ion-icon>
-        </ion-item>
-      </ion-list>
+    <ion-card class="card little-card"  *ngFor="let celula of grupo.celulas" color="light">
+      <celula [celula]="celula"></celula>
     </ion-card>
   </ion-list>
 </ion-card>

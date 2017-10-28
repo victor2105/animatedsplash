@@ -15,6 +15,7 @@ import { EntradaProvider } from '../providers/entrada/entrada';
 import { SaidaProvider } from '../providers/saida/saida';
 import { EstatisticasProvider } from '../providers/estatisticas/estatisticas';
 import { GrupoComponent } from '../components/grupo/grupo';
+import { CelulaComponent } from '../components/celula/celula';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { GrupoComponent } from '../components/grupo/grupo';
     EntradaPage,
     TabsPage,
     SplashPage,
-    GrupoComponent
+    GrupoComponent,
+    CelulaComponent
   ],
   imports: [
     BrowserModule,

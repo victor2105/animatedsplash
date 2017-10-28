@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Grupo } from '../../models/grupo';
+import { CelulaComponent } from '../celula/celula';
 
 /**
  * Generated class for the GrupoComponent component.
