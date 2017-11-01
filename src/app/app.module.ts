@@ -16,6 +16,7 @@ import { SaidaProvider } from '../providers/saida/saida';
 import { EstatisticasProvider } from '../providers/estatisticas/estatisticas';
 import { GrupoComponent } from '../components/grupo/grupo';
 import { CelulaComponent } from '../components/celula/celula';
+import { GruposProvider } from '../providers/grupos/grupos';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { CelulaComponent } from '../components/celula/celula';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     EntradaProvider,
     SaidaProvider,
-    EstatisticasProvider
+    EstatisticasProvider,
+    GruposProvider
   ]
 })
 export class AppModule {}

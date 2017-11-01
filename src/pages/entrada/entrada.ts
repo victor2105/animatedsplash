@@ -1,9 +1,9 @@
 import { Component, ViewChild, Input } from '@angular/core';
 import { NavController, Slides } from 'ionic-angular';
 import { GrupoComponent } from '../../components/grupo/grupo';
-import { CelulaComponent} from '../../components/celula/celula';
 import { Grupo } from '../../models/grupo';
-import { Celula } from '../../models/celula';
+import { EntradaProvider } from '../../providers/entrada/entrada';
+import { GruposProvider } from '../../providers/grupos/grupos';
 
 @Component({
   selector: 'page-home',
@@ -21,22 +21,18 @@ export class EntradaPage{
   @ViewChild(Slides) slides: Slides;
 
   goToSlide() {
-    this.slides.slideTo(2, 500);
   }
 
   
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, private grupoCtrl: GruposProvider) {
     this.center = false;
-
-
-    this.grupos = [];
-    this.addGrupo();
+    this.grupos = this.grupoCtrl.getGrupos();
+    this.grupos = this.grupoCtrl.addGrupo(this.grupos);
   }
 
   addGrupo(){
-    let grupo = new Grupo();
-    grupo.nome = "Novo grupo";
-    this.grupos.push(grupo);
+    this.grupos = this.grupoCtrl.addGrupo(this.grupos);
+    this.slides.slideTo(this.grupos.length, 500);   
   }
 
 }
