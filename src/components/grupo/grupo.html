@@ -1,11 +1,12 @@
 <ion-card class="card card-group" color="primary">
   <ion-card-header>
-    <p (click)="btnEditarTitulo()">{{grupo.nome}}</p>
-    <input *ngIf="editarTitulo" type="text" name="text" ng-model="grupo.nome">
-    
+    <p *ngIf="!editarTitulo" (click)="btnEditarTitulo()">{{grupo.nome}}: {{grupo.sum}}</p>
+
+    <ion-input *ngIf="editarTitulo" type="text" name="grupo.nome" [(ngModel)]="grupo.nome"></ion-input>
+    <button *ngIf="editarTitulo" ion-button block (click)="saveTitle()">Salvar</button>
   </ion-card-header>
   <ion-list>
-    <ion-card class="card little-card"  *ngFor="let celula of grupo.celulas" color="light">
+    <ion-card class="card little-card" *ngFor="let celula of grupo.celulas" color="light">
       <celula [celula]="celula"></celula>
     </ion-card>
   </ion-list>

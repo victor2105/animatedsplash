@@ -1,7 +1,14 @@
 <ion-header>
-  <ion-navbar color="secondary">
+  <ion-toolbar>    
     <ion-title>Entrada</ion-title>
-  </ion-navbar>
+    <ion-buttons end>
+      <button *ngIf="editar" ion-button icon-only>
+        <ion-icon name="checkmark"></ion-icon>
+      </button>
+    </ion-buttons>
+
+  </ion-toolbar>
+  
 </ion-header>
 
 <ion-content padding >

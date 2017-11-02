@@ -16,6 +16,8 @@ import { Celula } from '../../models/celula';
 export class GrupoComponent {
 
   @Input() grupo: Grupo;
+  @Input() editar: boolean;
+  
   editarTitulo: boolean;
 
   constructor() {
@@ -29,11 +31,19 @@ export class GrupoComponent {
     if (!this.grupo.celulas)
       this.grupo.celulas = [];
     this.grupo.celulas.push(celula);
+    this.grupo.calcSum();
   }
 
-  public btnEditarTitulo() {
+  btnEditarTitulo() {
     this.editarTitulo = true;
+    this.editar = true;
   }
+
+  saveTitle(){
+    // Save the group
+    this.editarTitulo = false;
+    this.editar = false;
+  } 
 
 
 

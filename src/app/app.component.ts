@@ -10,14 +10,14 @@ import { SplashPage } from '../pages/splash/splash';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  public rootPage:TabsPage;
+  public rootPage = TabsPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, modalCtrl: ModalController) {
     platform.ready().then(() => {
       statusBar.styleDefault();
-      //splashScreen.hide();
-      let splash = modalCtrl.create(SplashPage);
-      splash.present();
+      splashScreen.hide();
+      //let splash = modalCtrl.create(SplashPage);
+      //splash.present();
     });
   }
 }
