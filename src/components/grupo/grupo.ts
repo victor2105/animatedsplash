@@ -2,6 +2,8 @@ import { Component, Input } from '@angular/core';
 import { Grupo } from '../../models/grupo';
 import { CelulaComponent } from '../celula/celula';
 import { Celula } from '../../models/celula';
+import { ModalController } from 'ionic-angular';
+import { CelulaModalPage } from '../../pages/celula-modal/celula-modal';
 
 /**
  * Generated class for the GrupoComponent component.
@@ -20,7 +22,7 @@ export class GrupoComponent {
   
   editarTitulo: boolean;
 
-  constructor() {
+  constructor(private modalCtrl: ModalController) {
     console.log('Hello GrupoComponent Component');
   }
 
@@ -45,6 +47,9 @@ export class GrupoComponent {
     this.editar = false;
   } 
 
-
+  editarCelula(cel: Celula){
+    let modal = this.modalCtrl.create(CelulaModalPage, {data: cel });
+    modal.present();
+  }
 
 }
