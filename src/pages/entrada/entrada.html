@@ -15,9 +15,8 @@
 
 <ion-content class="v-content">
   <ion-slides>
-    <ion-slide class="v-slide" *ngFor="let grupo of grupos">
-      <grupo [grupo]="grupo" ></grupo>
-
+    <ion-slide *ngFor="let grupo of grupos">
+        <grupo [grupo]="grupo"></grupo>
     </ion-slide>
     <ion-slide>
       <button ion-button block (click)="addGrupo()">Adicionar grupo</button>

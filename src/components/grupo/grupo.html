@@ -3,12 +3,13 @@
   <ion-card-header class="card-header" style="align-content: left">
     <ion-input color="light" type="text" name="grupo.nome" [(ngModel)]="grupo.nome"></ion-input>
   </ion-card-header>
-  
   <ion-list class="list">
-    <ion-card class="card little-card" *ngFor="let celula of grupo.celulas" color="light">
-      <celula [celula]="celula" (click)="editarCelula(celula)"></celula>
-    </ion-card>
-    <button class="button" ion-button block (click)="novaCelula()" color="light">Adicionar</button>
+    <div class="scroll-group">
+      <ion-card class="card little-card" *ngFor="let celula of grupo.celulas" color="light">
+        <celula [celula]="celula" (click)="editarCelula(celula)"></celula>
+      </ion-card>
+    </div>
   </ion-list>
+  <button class="button" ion-button block (click)="novaCelula()" color="light">Adicionar</button>
 
 </ion-card>
