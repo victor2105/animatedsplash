@@ -1,16 +1,22 @@
 page-home {
-    background: #00aa00;
+    .v-content {
+        background-color: color($colors, primary);
+    }
     .card {
-        border-radius: 0.5em;
+        //border-radius: 0.5em;
     }
     .card-group {
-        font-weight: bold;
+        //font-weight: bold;
         //color: white;
         //background-color: rgb(90, 132, 211);
     }
     
     .little-card {
-        font-weight: normal;        
+        //font-weight: normal;        
+    }
+
+    .v-slide {
+        width: 80%;
     }
     
     .slide-zoom {

@@ -13,7 +13,8 @@ export class EntradaPage{
   
   @Input()
   center: boolean;
-
+  
+  editar: boolean;
   grupos: Grupo[];
 
 

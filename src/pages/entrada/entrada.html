@@ -1,14 +1,23 @@
 <ion-header>
-  <ion-navbar color="secondary">
+  <ion-toolbar color="secondary">
     <ion-title>Entrada</ion-title>
-  </ion-navbar>
+    <ion-buttons start>
+      <button ion-button (click)="addGrupo()">
+        <span ion-text color="primary" showWhen="ios">Cancel</span>
+        <ion-icon name="add" showWhen="android,windows"></ion-icon>
+      </button>
+    </ion-buttons>
+
+  </ion-toolbar>
+
 </ion-header>
 
-<ion-content padding >
-  
+
+<ion-content class="v-content">
   <ion-slides>
-    <ion-slide *ngFor="let grupo of grupos">
-      <grupo [grupo]="grupo"></grupo>
+    <ion-slide class="v-slide" *ngFor="let grupo of grupos">
+      <grupo [grupo]="grupo" ></grupo>
+
     </ion-slide>
     <ion-slide>
       <button ion-button block (click)="addGrupo()">Adicionar grupo</button>

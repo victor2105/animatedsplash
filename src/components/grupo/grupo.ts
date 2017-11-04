@@ -2,6 +2,8 @@ import { Component, Input } from '@angular/core';
 import { Grupo } from '../../models/grupo';
 import { CelulaComponent } from '../celula/celula';
 import { Celula } from '../../models/celula';
+import { ModalController } from 'ionic-angular';
+import { CelulaModalPage } from '../../pages/celula-modal/celula-modal';
 
 /**
  * Generated class for the GrupoComponent component.
@@ -16,9 +18,11 @@ import { Celula } from '../../models/celula';
 export class GrupoComponent {
 
   @Input() grupo: Grupo;
+  @Input() editar: boolean;
+  
   editarTitulo: boolean;
 
-  constructor() {
+  constructor(private modalCtrl: ModalController) {
     console.log('Hello GrupoComponent Component');
   }
 
@@ -29,12 +33,23 @@ export class GrupoComponent {
     if (!this.grupo.celulas)
       this.grupo.celulas = [];
     this.grupo.celulas.push(celula);
+    this.grupo.calcSum();
   }
 
-  public btnEditarTitulo() {
+  btnEditarTitulo() {
     this.editarTitulo = true;
+    this.editar = true;
   }
 
+  saveTitle(){
+    // Save the group
+    this.editarTitulo = false;
+    this.editar = false;
+  } 
 
+  editarCelula(cel: Celula){
+    let modal = this.modalCtrl.create(CelulaModalPage, {data: cel });
+    modal.present();
+  }
 
 }
