@@ -17,6 +17,7 @@ import { EstatisticasProvider } from '../providers/estatisticas/estatisticas';
 import { GrupoComponent } from '../components/grupo/grupo';
 import { CelulaComponent } from '../components/celula/celula';
 import { GruposProvider } from '../providers/grupos/grupos';
+import { CelulaModalPage } from '../pages/celula-modal/celula-modal';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { GruposProvider } from '../providers/grupos/grupos';
     TabsPage,
     SplashPage,
     GrupoComponent,
-    CelulaComponent
+    CelulaComponent,
+    CelulaModalPage
   ],
   imports: [
     BrowserModule,
@@ -40,7 +42,8 @@ import { GruposProvider } from '../providers/grupos/grupos';
     ContactPage,
     EntradaPage,
     TabsPage,
-    SplashPage
+    SplashPage,
+    CelulaModalPage
   ],
   providers: [
     StatusBar,
