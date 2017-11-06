@@ -1,8 +1,11 @@
 import { Celula } from "./celula";
 
 export class Grupo {
+    public id: number;
     public nome: string;
     public celulas: Celula[];
+    public valor: number;
+    public funcao: string;
 
     public sum: number;
 

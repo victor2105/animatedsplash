@@ -18,6 +18,9 @@ import { GrupoComponent } from '../components/grupo/grupo';
 import { CelulaComponent } from '../components/celula/celula';
 import { GruposProvider } from '../providers/grupos/grupos';
 import { CelulaModalPage } from '../pages/celula-modal/celula-modal';
+import { DatabaseProvider } from '../providers/database/database';
+import { SQLite } from '@ionic-native/sqlite';
+import { EsquemaProvider } from '../providers/esquema/esquema';
 
 @NgModule({
   declarations: [
@@ -52,7 +55,8 @@ import { CelulaModalPage } from '../pages/celula-modal/celula-modal';
     EntradaProvider,
     SaidaProvider,
     EstatisticasProvider,
-    GruposProvider
+    GruposProvider,
+    EsquemaProvider
   ]
 })
 export class AppModule {}

@@ -1,53 +1,36 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
-import { Grupo } from '../../models/grupo';
-import { SQLiteObject } from '@ionic-native/sqlite';
 import { DatabaseProvider } from '../database/database';
+import { Esquema } from '../../models/esquema';
+import { SQLiteObject } from '@ionic-native/sqlite';
 
 /*
-  Generated class for the GruposProvider provider.
+  Generated class for the EsquemaProvider provider.
 
   See https://angular.io/guide/dependency-injection for more info on providers
   and Angular DI.
 */
 @Injectable()
-export class GruposProvider {
+export class EsquemaProvider {
 
-  grupos: Grupo[];
-  
   constructor(private dbProvider: DatabaseProvider) {
+    console.log('Hello EsquemaProvider Provider');
   }
 
-  getGrupos(){
-    if(!this.grupos){
-      this.grupos = new Array<Grupo>();
-    }
-    return this.grupos;
-  }
-
-  addGrupo(grupos: Grupo[]){
-    let grupo: Grupo;
-    grupo = new Grupo();
-    grupo.nome = "Novo grupo";
-    grupo.celulas = [];
-    grupos.push(grupo);
-    return grupos;
-  }
-  
-  public saveUpdate(g: Grupo){
-    if(g.id != 0){
-      this.update(g);
+  public saveUpdate(esquema: Esquema){
+    if(esquema.id != 0){
+      this.update(esquema);
     }else{
-      this.insert(g);
+      this.insert(esquema);
     }
   }
 
-  public insert(g: Grupo) {
+  public insert(esquema: Esquema) {
     return this.dbProvider.getDB()
       .then((db: SQLiteObject) => {
-        let sql = 'insert into grupos (nome, valor, funcao) values (?, ?, ?)';
-        let data = [g.nome, g.valor, g.funcao];
+        let sql = 'insert into esquemas (nome) values (?)';
+        let data = [esquema.nome];
  
         return db.executeSql(sql, data)
           .catch((e) => console.error(e));
@@ -55,11 +38,11 @@ export class GruposProvider {
       .catch((e) => console.error(e));
   }
  
-  public update(g: Grupo) {
+  public update(esquema: Esquema) {
     return this.dbProvider.getDB()
       .then((db: SQLiteObject) => {
-        let sql = 'update grupos set nome = ?, valor=?, funcao=? where id = ?';
-        let data = [g.nome, g.valor, g.funcao, g.id];
+        let sql = 'update esquemas set nome=? where id = ?';
+        let data = [esquema.nome, esquema.id];
  
         return db.executeSql(sql, data)
           .catch((e) => console.error(e));
@@ -70,7 +53,7 @@ export class GruposProvider {
   public remove(id: number) {
     return this.dbProvider.getDB()
       .then((db: SQLiteObject) => {
-        let sql = 'delete from grupos where id = ?';
+        let sql = 'delete from esquemas where id = ?';
         let data = [id];
  
         return db.executeSql(sql, data)
@@ -82,20 +65,18 @@ export class GruposProvider {
   public get(id: number) {
     return this.dbProvider.getDB()
       .then((db: SQLiteObject) => {
-        let sql = 'select * from grupos where id = ?';
+        let sql = 'select * from esquemas where id = ?';
         let data = [id];
  
         return db.executeSql(sql, data)
           .then((data: any) => {
             if (data.rows.length > 0) {
               let item = data.rows.item(0);
-              let g = new Grupo();
-              g.id = item.id;
-              g.nome = item.nome;
-              g.valor = item.valor;
-              g.funcao = item.funcao;
+              let esquema = new Esquema();
+              esquema.id = item.id;
+              esquema.nome = item.nome;
  
-              return g;
+              return esquema;
             }
  
             return null;
@@ -108,7 +89,7 @@ export class GruposProvider {
   public getAll(active: boolean, name: string = null) {
     return this.dbProvider.getDB()
       .then((db: SQLiteObject) => {
-        let sql = 'SELECT e.* FROM grupos p where e.ativo = ?';
+        let sql = 'SELECT e.* FROM esquemas p where e.ativo = ?';
         var data: any[] = [active ? 1 : 0];
  
         // filtrando pelo nome
