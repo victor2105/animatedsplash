@@ -6,10 +6,10 @@ import { EntradaProvider } from '../../providers/entrada/entrada';
 import { GruposProvider } from '../../providers/grupos/grupos';
 
 @Component({
-  selector: 'page-home',
-  templateUrl: 'entrada.html'
+  selector: 'esquema-page',
+  templateUrl: 'esquema.html'
 })
-export class EntradaPage{
+export class EsquemaPage{
   
   @Input()
   center: boolean;

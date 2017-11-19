@@ -13,6 +13,8 @@ import { Grupo } from '../../models/grupo';
 export class GruposProvider {
 
   grupos: Grupo[];
+
+  grupo: Grupo;
   
   constructor() {
   }
