@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { Projeto } from '../../models/projeto';
+import { Project } from '../../models/projeto';
+import { ProjectProvider } from '../../providers/project/project';
 
 /**
  * Generated class for the GaleriaPage page.
@@ -16,14 +17,21 @@ import { Projeto } from '../../models/projeto';
 })
 export class GaleriaPage {
 
-  projetos: Projeto[];
+  projects: Project[] = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
+    public projetoCtrl: ProjectProvider) {
+    this.projects = this.projetoCtrl.projects;
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad GaleriaPage');
+  public novoProjeto(){
+    this.navCtrl.push('NovoProjetoPage', {});
+    this.projects = this.projetoCtrl.projects;
   }
-  
+
+  public openProject(){
+    this.navCtrl.push('EsquemaPage', {});
+  }
 
 }

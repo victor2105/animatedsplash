@@ -6,10 +6,10 @@
 -->
 <ion-header>
 
-  <ion-toolbar color="secondary">
+  <ion-toolbar>
     <ion-title>Meus projetos</ion-title>
     <ion-buttons start>
-      <button ion-button (click)="addGrupo()">
+      <button ion-button (click)="novoProjeto()">
         <span ion-text color="primary" showWhen="ios">Novo</span>
         <ion-icon name="add" showWhen="android,windows"></ion-icon>
       </button>
@@ -22,4 +22,9 @@
 
 <ion-content padding>
 
+  <ion-list>
+    <ion-item *ngFor="let project of projects" (click)="openProject(project)">
+      {{project.name}}
+    </ion-item>
+  </ion-list>
 </ion-content>

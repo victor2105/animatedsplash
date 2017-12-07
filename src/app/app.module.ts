@@ -12,6 +12,7 @@ import { GruposProvider } from '../providers/grupos/grupos';
 import { CelulaModalPage } from '../pages/celula-modal/celula-modal';
 import { EntradaProvider } from '../providers/entrada/entrada';
 import { EsquemaPage } from '../pages/esquema/esquema';
+import { ProjectProvider } from '../providers/project/project';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { EsquemaPage } from '../pages/esquema/esquema';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     EntradaProvider,
-    GruposProvider
+    GruposProvider,
+    ProjectProvider
   ]
 })
 export class AppModule {}

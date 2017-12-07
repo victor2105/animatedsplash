@@ -1,7 +1,7 @@
 import { Grupo } from "./grupo";
 
-export class Projeto {
+export class Project {
     public template: boolean;
-    public nome: string;
+    public name: string;
     public grupos: Grupo[];
 }
