@@ -6,15 +6,24 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>NovoProjeto</ion-title>
+  <ion-navbar color="primary">
+    <ion-title>Novo Projeto</ion-title>
+    <ion-buttons end>
+      <button ion-button navPush="NovoProjetoPage" >
+        <ion-icon name="add" showWhen="android,windows"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-  <ion-input color="light" type="text" name="name" [(ngModel)]="name"></ion-input>
-  <button ion-button block (click)="save()">Salvar</button>
-  <button ion-button block (click)="cancel()">Cancelar</button>
+
+  <ion-item>
+      <ion-label>Nome</ion-label>
+      <ion-input [(ngModel)]="project.name" placeholder="Gastos"></ion-input>
+  </ion-item>
+
+  <button ion-button block clear (click)="addProject(project)">Salvar</button>
 </ion-content>

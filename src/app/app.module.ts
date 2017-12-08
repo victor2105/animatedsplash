@@ -14,6 +14,11 @@ import { EntradaProvider } from '../providers/entrada/entrada';
 import { EsquemaPage } from '../pages/esquema/esquema';
 import { ProjectProvider } from '../providers/project/project';
 
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { FIREBASE_CREDENTIALS } from './firebase.credentials';
+import { ProjectListService } from '../services/project-list/project-list.service';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -22,7 +27,9 @@ import { ProjectProvider } from '../providers/project/project';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    AngularFireModule.initializeApp(FIREBASE_CREDENTIALS),
+    AngularFireDatabaseModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -34,7 +41,8 @@ import { ProjectProvider } from '../providers/project/project';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     EntradaProvider,
     GruposProvider,
-    ProjectProvider
+    ProjectProvider,
+    ProjectListService
   ]
 })
 export class AppModule {}

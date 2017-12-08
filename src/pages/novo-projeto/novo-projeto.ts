@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { ProjectProvider } '../../providers/project/project';
-
+import { ProjectProvider } from '../../providers/project/project';
+import { Cel } from '../../models/cel';
+import { ProjectListService } from '../../services/project-list/project-list.service';
 /**
  * Generated class for the NovoProjetoPage page.
  *
@@ -16,24 +17,28 @@ import { ProjectProvider } '../../providers/project/project';
 })
 export class NovoProjetoPage {
 
-  name: string;
-  template: boolean = false;
+  project : Cel = {
+    name: '',
+    value: 0,
+    function: '',
+    parent: '',
+    check: false
+  };
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
-    private projectCtrl : ProjectProvider ) {
+    private projects : ProjectListService ) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad NovoProjetoPage');
   }
 
-  save(name, template){
-    this.projectCtrl.addProject(this.name, this.template)
-  }
-
-  cancel(){
-    this.navCtrl.pop();
+  addProject(project : Cel){
+    this.projects.addProject(project)
+    .then(ref => {
+      this.navCtrl.setRoot('GaleriaPage', {key: ref.key});
+    });
   }
 
 }

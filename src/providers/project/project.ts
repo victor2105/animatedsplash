@@ -11,18 +11,10 @@ import { Project } from '../../models/projeto';
 @Injectable()
 export class ProjectProvider {
 
-  projects: Project[] = [];
+  key: string;
 
   constructor() {
     console.log('Hello ProjectProvider Provider');
-  }
-
-  public addProject(name, template) {
-    let project : Project = new Project();
-    project.name = "Projecto";
-    project.template = true;
-    project.grupos = [];
-    this.projects.push(project);
   }
 
 }

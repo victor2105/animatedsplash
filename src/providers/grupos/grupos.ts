@@ -3,6 +3,12 @@ import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Grupo } from '../../models/grupo';
 
+import { AngularFireDatabase } from "angularfire2/database";
+import { Observable } from 'rxjs/Observable';
+
+import { Cel } from "../../models/cel";
+import { AngularFireList } from 'angularfire2/database/interfaces';
+
 /*
   Generated class for the GruposProvider provider.
 
@@ -11,30 +17,26 @@ import { Grupo } from '../../models/grupo';
 */
 @Injectable()
 export class GruposProvider {
+  private groupListRef$: AngularFireList<Cel>;
 
-  grupos: Grupo[];
+  projectKey: string;
 
-  grupo: Grupo;
+  constructor(private db : AngularFireDatabase) {
+  }
+
   
-  constructor() {
+  selectProject(key: string){
+      this.projectKey = key;
+      let ref = this.projectKey+".children";
+      this.groupListRef$ = this.db.list<Cel>(ref);
   }
 
-  getGrupos(){
-    if(!this.grupos){
-      this.grupos = new Array<Grupo>();
-    }
-    return this.grupos;
+  getGroupList(){
+    return this.groupListRef$;
   }
 
-  addGrupo(grupos: Grupo[]){
-    let grupo: Grupo;
-    grupo = new Grupo();
-    grupo.nome = "Novo grupo";
-    grupo.celulas = [];
-    grupos.push(grupo);
-    return grupos;
+  addGroup(group : Cel) {
+    return this.groupListRef$.push(group);
   }
-  
-
 
 }

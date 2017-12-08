@@ -1,8 +1,13 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, List } from 'ionic-angular';
 import { Project } from '../../models/projeto';
 import { ProjectProvider } from '../../providers/project/project';
+import { ProjectListService } from '../../services/project-list/project-list.service';
+import { Cel } from '../../models/cel';
 
+import { AngularFireDatabase } from 'angularfire2/database';
+import { Observable } from 'rxjs/Observable';
+import { GruposProvider } from '../../providers/grupos/grupos';
 /**
  * Generated class for the GaleriaPage page.
  *
@@ -17,21 +22,17 @@ import { ProjectProvider } from '../../providers/project/project';
 })
 export class GaleriaPage {
 
-  projects: Project[] = [];
-
+  projects : Observable<Cel[]> = this.projectListService.getProjectList().valueChanges();
+  
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
-    public projetoCtrl: ProjectProvider) {
-    this.projects = this.projetoCtrl.projects;
+    private groupCtrl: GruposProvider,
+    private projectListService : ProjectListService) {
   }
 
-  public novoProjeto(){
-    this.navCtrl.push('NovoProjetoPage', {});
-    this.projects = this.projetoCtrl.projects;
-  }
-
-  public openProject(){
-    this.navCtrl.push('EsquemaPage', {});
+  select(project: Cel){   
+    this.groupCtrl.selectProject(project.key);
+    this.navCtrl.setRoot("EsquemaPage");
   }
 
 }

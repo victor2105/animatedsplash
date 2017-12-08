@@ -4,6 +4,8 @@ import { GrupoComponent } from '../../components/grupo/grupo';
 import { Grupo } from '../../models/grupo';
 import { EntradaProvider } from '../../providers/entrada/entrada';
 import { GruposProvider } from '../../providers/grupos/grupos';
+import { Observable } from 'rxjs/Observable';
+import { Cel } from '../../models/cel';
 
 @Component({
   selector: 'esquema-page',
@@ -15,25 +17,30 @@ export class EsquemaPage{
   center: boolean;
   
   editar: boolean;
-  grupos: Grupo[];
-
-
+  
+  grupos: Observable<Cel[]>;
 
   @ViewChild(Slides) slides: Slides;
+
+  project : Cel = {
+    name: 'novo_group',
+    value: 0,
+    function: 'sum all from me',
+    parent: '',
+    check: false
+  };
 
   goToSlide() {
   }
 
   
-  constructor(public navCtrl: NavController, private grupoCtrl: GruposProvider) {
+  constructor(public navCtrl: NavController, private groupCtrl: GruposProvider) {
     this.center = false;
-    this.grupos = this.grupoCtrl.getGrupos();
-    this.grupos = this.grupoCtrl.addGrupo(this.grupos);
+    this.grupos = this.groupCtrl.getGroupList().valueChanges();
   }
 
-  addGrupo(){
-    this.grupos = this.grupoCtrl.addGrupo(this.grupos);
-    this.slides.slideTo(this.grupos.length, 500);   
+  addGrupo(project: Cel){
+    this.groupCtrl.addGroup(project);
   }
 
 }
