@@ -18,12 +18,17 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { FIREBASE_CREDENTIALS } from './firebase.credentials';
 import { ProjectListService } from '../services/project-list/project-list.service';
+import { ToastService } from '../services/toast/toast.service';
+import { NovoProjetoPage } from '../pages/novo-projeto/novo-projeto';
+import { GaleriaPage } from '../pages/galeria/galeria';
+import { ProjectPage } from '../pages/project/project';
 
 @NgModule({
   declarations: [
     MyApp,
     GrupoComponent,
-    CelulaComponent
+    CelulaComponent,
+    GaleriaPage
   ],
   imports: [
     BrowserModule,
@@ -33,7 +38,8 @@ import { ProjectListService } from '../services/project-list/project-list.servic
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp
+    MyApp,
+    GaleriaPage
   ],
   providers: [
     StatusBar,
@@ -42,7 +48,8 @@ import { ProjectListService } from '../services/project-list/project-list.servic
     EntradaProvider,
     GruposProvider,
     ProjectProvider,
-    ProjectListService
+    ProjectListService,
+    ToastService 
   ]
 })
 export class AppModule {}

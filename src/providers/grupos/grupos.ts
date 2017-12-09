@@ -19,15 +19,16 @@ import { AngularFireList } from 'angularfire2/database/interfaces';
 export class GruposProvider {
   private groupListRef$: AngularFireList<Cel>;
 
-  projectKey: string;
+  project: Cel;
 
   constructor(private db : AngularFireDatabase) {
   }
 
   
-  selectProject(key: string){
-      this.projectKey = key;
-      let ref = this.projectKey+".children";
+  selectProject(key: Cel){
+      this.project = key;
+      let ref = this.project+".children";
+      console.log(ref);
       this.groupListRef$ = this.db.list<Cel>(ref);
   }
 

@@ -8,6 +8,8 @@ import { Cel } from '../../models/cel';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 import { GruposProvider } from '../../providers/grupos/grupos';
+import { ProjectPage } from '../project/project';
+import { NovoProjetoPage } from '../novo-projeto/novo-projeto';
 /**
  * Generated class for the GaleriaPage page.
  *
@@ -17,22 +19,33 @@ import { GruposProvider } from '../../providers/grupos/grupos';
 
 @IonicPage()
 @Component({
-  selector: 'page-galeria',
+  selector: 'galeria',
   templateUrl: 'galeria.html',
 })
 export class GaleriaPage {
 
-  projects : Observable<Cel[]> = this.projectListService.getProjectList().valueChanges();
-  
+  projectList$ : Observable<Cel[]> ;
+
+
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
-    private groupCtrl: GruposProvider,
     private projectListService : ProjectListService) {
+      this.projectList$ = this.projectListService
+      .getProjectList() // DB LIST 
+      .snapshotChanges()// key and values
+      .map(changes => {
+        return changes.map(c => ({
+          key: c.payload.key, ...c.payload.val()
+        }))
+      });
   }
 
-  select(project: Cel){   
-    this.groupCtrl.selectProject(project.key);
-    this.navCtrl.setRoot("EsquemaPage");
+  newProject(){
+    this.navCtrl.push(NovoProjetoPage);
+  }
+
+  editProject(project) {
+    this.navCtrl.push(ProjectPage, {project: project});
   }
 
 }

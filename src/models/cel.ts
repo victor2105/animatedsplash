@@ -1,10 +1,10 @@
-export interface Cel {
+export class Cel {
     key? : string;
     parent: string;
     name: string;
     value: number;
     function: string;
     check: boolean;
-    children?: Cel[];
-    listeners?: Cel[];
+    children?: any[];
+    listeners?: any[];
 }

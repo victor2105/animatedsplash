@@ -7,9 +7,9 @@
 <ion-header>
 
   <ion-navbar color="primary">
-    <ion-title>Meus projetos</ion-title>
+    <ion-title>Galeria</ion-title>
     <ion-buttons end>
-      <button ion-button navPush="NovoProjetoPage" >
+      <button ion-button (click)="newProject()" >
         <ion-icon name="add" showWhen="android,windows"></ion-icon>
       </button>
     </ion-buttons>
@@ -21,7 +21,11 @@
 <ion-content padding>
 
   <ion-list>
-    <ion-item *ngFor="let project of projects | async" (click)="select(project)">
+    <ion-list-header>
+      Projetos
+    </ion-list-header>
+    <ion-item *ngFor="let project of projectList$ | async" (click)="editProject(project)"
+    [navParams]="{project: project}">
       {{project.name}}
     </ion-item>
   </ion-list>

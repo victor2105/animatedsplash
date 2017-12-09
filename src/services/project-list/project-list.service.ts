@@ -9,10 +9,8 @@ import { Cel } from "../../models/cel";
 @Injectable()
 export class ProjectListService {
 
-    projectListRef$ = this.db.list<Cel>( 'project-list' );
-    selectedProjectKey: string;
-    projectChildrenRef$;
-
+    private projectListRef$ = this.db.list<Cel>
+    ( 'project-list' );
 
     constructor (private db: AngularFireDatabase) {
     }
@@ -21,8 +19,12 @@ export class ProjectListService {
         return this.projectListRef$;
     }
 
-    addProject(project : Cel) {
+    addProject(project: Cel) {
         return this.projectListRef$.push(project);
+    }
+
+    editProject(project: Cel) {
+        return this.projectListRef$.update(project.key, project);
     }
 
 }

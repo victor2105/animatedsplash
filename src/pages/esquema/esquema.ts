@@ -28,6 +28,7 @@ export class EsquemaPage{
     function: 'sum all from me',
     parent: '',
     check: false
+    
   };
 
   goToSlide() {
