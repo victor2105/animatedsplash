@@ -24,10 +24,13 @@ export class ProjectPage {
     public navParams: NavParams,
     public projectDB: ProjectListService,
     private toast: ToastService) {
+      this.project = this.navParams.get('project');
+      if(!this.project){
+        this.project = new Cel();
+      }
   }
 
   ionViewDidLoad() {
-    this.project = this.navParams.get('project');
   }
 
   saveProject(project: Cel) {

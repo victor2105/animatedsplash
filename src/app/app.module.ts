@@ -19,16 +19,18 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { FIREBASE_CREDENTIALS } from './firebase.credentials';
 import { ProjectListService } from '../services/project-list/project-list.service';
 import { ToastService } from '../services/toast/toast.service';
-import { NovoProjetoPage } from '../pages/novo-projeto/novo-projeto';
 import { GaleriaPage } from '../pages/galeria/galeria';
 import { ProjectPage } from '../pages/project/project';
+import { NovoProjetoPage } from '../pages/novo-projeto/novo-projeto';
 
 @NgModule({
   declarations: [
     MyApp,
     GrupoComponent,
     CelulaComponent,
-    GaleriaPage
+    GaleriaPage,
+    ProjectPage,
+    NovoProjetoPage,
   ],
   imports: [
     BrowserModule,
@@ -39,7 +41,9 @@ import { ProjectPage } from '../pages/project/project';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    GaleriaPage
+    GaleriaPage,
+    ProjectPage,
+    NovoProjetoPage,
   ],
   providers: [
     StatusBar,

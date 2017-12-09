@@ -2,7 +2,7 @@
 <widget id="com.browpresa.finapp" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>FinApp</name>
     <description>Um bom aplicativo para organizar o seu dinheiro.</description>
-    <author email="victorhs.dimap@gmail.com" href="http://ionicframework.com/">Victor Henrique dos Santos</author>
+    <author email="victorhs.dimap@gmail.com">Victor Henrique dos Santos</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />

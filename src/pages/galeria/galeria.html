@@ -24,8 +24,7 @@
     <ion-list-header>
       Projetos
     </ion-list-header>
-    <ion-item *ngFor="let project of projectList$ | async" (click)="editProject(project)"
-    [navParams]="{project: project}">
+    <ion-item *ngFor="let project of projectList$ | async" (click)="editProject(project)">
       {{project.name}}
     </ion-item>
   </ion-list>
