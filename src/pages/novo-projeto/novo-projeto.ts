@@ -5,7 +5,6 @@ import { Cel } from '../../models/cel';
 import { ProjectListService } from '../../services/project-list/project-list.service';
 import { ToastService } from '../../services/toast/toast.service';
 import { GaleriaPage } from '../galeria/galeria';
-import { AngularFireDatabase } from 'angularfire2/database';
 /**
  * Generated class for the NovoProjetoPage page.
  *
@@ -20,22 +19,25 @@ import { AngularFireDatabase } from 'angularfire2/database';
 })
 export class NovoProjetoPage {
 
-  private projectListRef$ = this.db.list<Cel>
-  ( 'group-list' );
+  project: Cel;
 
-  constructor (private db: AngularFireDatabase) {
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
+    private projects: ProjectListService,
+    private toast: ToastService) {
+      this.project = new Cel();
   }
 
-  getProjectList () {
-      return this.projectListRef$;
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad NovoProjetoPage');
   }
 
   addProject(project: Cel) {
-      return this.projectListRef$.push(project);
-  }
-
-  editProject(project: Cel) {
-      return this.projectListRef$.update(project.key, project);
+    this.projects.addProject(project)
+      .then(ref => {
+        this.toast.show(`${project.name} saved!`);
+        this.navCtrl.pop();
+      });
   }
 
 }

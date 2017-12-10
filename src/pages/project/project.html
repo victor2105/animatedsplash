@@ -22,4 +22,11 @@
   
     <button ion-button block clear (click)="saveProject(project)">Salvar</button>
 
+
+    <ion-item *ngFor="let group of groupListList$ | async">
+      {{group.name}} {{group.parent}}
+    </ion-item>
+    <button ion-button block clear (click)="newGroup('Gruops')">Salvar</button>
+
+    
   </ion-content>

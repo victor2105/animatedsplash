@@ -4,6 +4,8 @@ import { Cel } from '../../models/cel';
 import { Grupo } from '../../models/grupo';
 import { ProjectListService } from '../../services/project-list/project-list.service';
 import { ToastService } from '../../services/toast/toast.service';
+import { Observable } from 'rxjs/Observable';
+import { GroupListService } from '../../services/group-list/group-list.service';
 
 /**
  * Generated class for the ProjectPage page.
@@ -18,16 +20,26 @@ import { ToastService } from '../../services/toast/toast.service';
   templateUrl: 'project.html',
 })
 export class ProjectPage {
-  project: Cel;
+  project: Cel;  
+
+  groupListList$ : Observable<Cel[]> ;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public projectDB: ProjectListService,
+    private groupDB: GroupListService,
     private toast: ToastService) {
       this.project = this.navParams.get('project');
-      if(!this.project){
-        this.project = new Cel();
-      }
+      
+
+      this.groupListList$ = this.groupDB
+      .gettList() // DB LIST 
+      .snapshotChanges()// key and values
+      .map(changes => {
+        return changes.map(c => ({
+          key: c.payload.key, ...c.payload.val()
+        }))
+      });
   }
 
   ionViewDidLoad() {
@@ -40,5 +52,25 @@ export class ProjectPage {
         this.navCtrl.pop();
       })
   }
+
+  newGroup(name){
+    let group = new Cel();
+    group.name = name;
+    // Do not save if there is no project to reference
+    if(this.project.key == null) return;
+
+    group.parent = this.project.key;
+    
+    this.groupDB.add(group)
+    .then(key => {
+      if(!this.project.children){
+        this.project.children = [];
+      }
+      this.project.children.push({key: key});
+      this.saveProject(this.project);
+    });
+  }
+
+
 
 }

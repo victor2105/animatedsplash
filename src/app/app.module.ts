@@ -22,6 +22,7 @@ import { ToastService } from '../services/toast/toast.service';
 import { GaleriaPage } from '../pages/galeria/galeria';
 import { ProjectPage } from '../pages/project/project';
 import { NovoProjetoPage } from '../pages/novo-projeto/novo-projeto';
+import { GroupListService } from '../services/group-list/group-list.service';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { NovoProjetoPage } from '../pages/novo-projeto/novo-projeto';
     GruposProvider,
     ProjectProvider,
     ProjectListService,
+    GroupListService,
     ToastService 
   ]
 })

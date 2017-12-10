@@ -5,26 +5,25 @@ import { Observable } from 'rxjs/Observable';
 import { Cel } from "../../models/cel";
 
 
-
 @Injectable()
 export class GroupListService {
 
-    groupListRef$ = this.db.list( 'group-list' );
-  
-    constructor (private db: AngularFireDatabase) {
+    private groupListRef$ = this.db.list<Cel>
+        ('group-list');
+
+    constructor(private db: AngularFireDatabase) {
     }
 
-    getProjectList () {
+    gettList() {
         return this.groupListRef$;
     }
 
-    addGroup(name, value, func) {
-        return this.groupListRef$.push(  {
-                name: name,
-                value: value,
-                func: func,
-                cels: [],
-            } );
+    add(group: Cel) {
+        return this.groupListRef$.push(group);
+    }
+
+    edit(group: Cel) {
+        return this.groupListRef$.update(group.key, group);
     }
 
 }
