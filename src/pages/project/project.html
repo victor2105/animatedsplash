@@ -15,18 +15,13 @@
 
 <ion-content class="v-content">
 
-    <ion-item>
-        <ion-label>Nome</ion-label>
-        <ion-input [(ngModel)]="project.name" placeholder="Gastos"></ion-input>
-    </ion-item>
-  
-    <button ion-button block clear (click)="saveProject(project)">Salvar</button>
-
-
-    <ion-item *ngFor="let group of groupListList$ | async">
-      {{group.name}} {{group.parent}}
-    </ion-item>
-    <button ion-button block clear (click)="newGroup('Gruops')">Salvar</button>
-
+  <ion-slides>
+    <ion-slide *ngFor="let group of groupList$ | async">
+        <grupo ></grupo>
+    </ion-slide>
+    <ion-slide>
+      <button ion-button block (click)="addGrupo('Novo Grupo')">Adicionar grupo</button>
+    </ion-slide>
+  </ion-slides>
     
   </ion-content>

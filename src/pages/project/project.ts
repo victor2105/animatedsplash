@@ -22,7 +22,7 @@ import { GroupListService } from '../../services/group-list/group-list.service';
 export class ProjectPage {
   project: Cel;  
 
-  groupListList$ : Observable<Cel[]> ;
+  groupList$ : Observable<Cel[]> ;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -31,15 +31,16 @@ export class ProjectPage {
     private toast: ToastService) {
       this.project = this.navParams.get('project');
       
-
-      this.groupListList$ = this.groupDB
-      .gettList() // DB LIST 
+      // db.list('/items', ref => ref.orderByChild('size').equalTo('large'))
+      this.groupList$ = this.groupDB
+      .getCelWithParent(this.project.key) // children of this.project
       .snapshotChanges()// key and values
       .map(changes => {
         return changes.map(c => ({
           key: c.payload.key, ...c.payload.val()
         }))
       });
+
   }
 
   ionViewDidLoad() {
@@ -56,6 +57,7 @@ export class ProjectPage {
   newGroup(name){
     let group = new Cel();
     group.name = name;
+    group.value = 0;
     // Do not save if there is no project to reference
     if(this.project.key == null) return;
 
@@ -63,11 +65,7 @@ export class ProjectPage {
     
     this.groupDB.add(group)
     .then(key => {
-      if(!this.project.children){
-        this.project.children = [];
-      }
-      this.project.children.push({key: key});
-      this.saveProject(this.project);
+      
     });
   }
 

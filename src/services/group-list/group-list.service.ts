@@ -11,7 +11,7 @@ export class GroupListService {
     private groupListRef$ = this.db.list<Cel>
         ('group-list');
 
-    constructor(private db: AngularFireDatabase) {
+    constructor(public db: AngularFireDatabase) {
     }
 
     gettList() {
@@ -24,6 +24,10 @@ export class GroupListService {
 
     edit(group: Cel) {
         return this.groupListRef$.update(group.key, group);
+    }
+
+    getCelWithParent(parent){
+        return this.db.list('group-list', ref => ref.orderByChild('parent').equalTo(parent));
     }
 
 }

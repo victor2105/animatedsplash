@@ -26,10 +26,7 @@ export class GruposProvider {
 
   
   selectProject(key: Cel){
-      this.project = key;
-      let ref = this.project+".children";
-      console.log(ref);
-      this.groupListRef$ = this.db.list<Cel>(ref);
+      this.project = key;     
   }
 
   getGroupList(){
