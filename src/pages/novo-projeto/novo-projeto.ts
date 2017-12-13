@@ -33,6 +33,7 @@ export class NovoProjetoPage {
   }
 
   addProject(project: Cel) {
+    project.parent = 'victorhsteste';
     this.projects.addProject(project)
       .then(ref => {
         this.toast.show(`${project.name} saved!`);

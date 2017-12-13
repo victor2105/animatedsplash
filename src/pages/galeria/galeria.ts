@@ -7,7 +7,6 @@ import { Cel } from '../../models/cel';
 
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
-import { GruposProvider } from '../../providers/grupos/grupos';
 import { ProjectPage } from '../project/project';
 import { NovoProjetoPage } from '../novo-projeto/novo-projeto';
 /**

@@ -17,10 +17,10 @@
 
   <ion-slides>
     <ion-slide *ngFor="let group of groupList$ | async">
-        <grupo ></grupo>
+        <grupo [group]="group" [key]="group.key" ></grupo>
     </ion-slide>
     <ion-slide>
-      <button ion-button block (click)="addGrupo('Novo Grupo')">Adicionar grupo</button>
+      <button ion-button block (click)="newGroup('Novo Grupo')">Adicionar grupo</button>
     </ion-slide>
   </ion-slides>
     

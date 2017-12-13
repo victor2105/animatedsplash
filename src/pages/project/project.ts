@@ -41,6 +41,8 @@ export class ProjectPage {
         }))
       });
 
+      //this.groupList$.subscribe();
+
   }
 
   ionViewDidLoad() {

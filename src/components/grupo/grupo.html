@@ -1,15 +1,14 @@
 <ion-card class="card card-group">
-
-  <ion-card-header class="card-header" style="align-content: left">
-    <ion-input color="light" type="text" ></ion-input>
+  <ion-card-header class="card-header" style="align-content: left">    
+    <ion-input color="light" type="text" name="group.name" [(ngModel)]="group.name" ></ion-input>
   </ion-card-header>
   <ion-list class="list">
     <div class="scroll-group">
-      <ion-card class="card little-card" color="light">
-        <celula ></celula>
+      <ion-card class="card little-card" *ngFor="let cel of celList$ | async" color="light">
+        <celula [cel]="cel"></celula>
       </ion-card>
     </div>
   </ion-list>
-  <button class="button" ion-button block (click)="novaCelula()" color="light">Adicionar</button>
+  <button class="button" ion-button block (click)="newCel('Nova Célula')" color="light">Adicionar</button>
 
 </ion-card>
