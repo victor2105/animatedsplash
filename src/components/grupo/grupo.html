@@ -1,6 +1,7 @@
 <ion-card class="card card-group">
-  <ion-card-header class="card-header" style="align-content: left">    
-    <ion-input color="light" type="text" name="group.name" [(ngModel)]="group.name" ></ion-input>
+  <ion-card-header class="card-header" style="align-content: left">
+    <p (click)="btnEditarTitulo()">{{group.name}} - {{group.value}}</p>
+
   </ion-card-header>
   <ion-list class="list">
     <div class="scroll-group">
