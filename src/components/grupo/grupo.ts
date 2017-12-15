@@ -46,7 +46,7 @@ export class GrupoComponent implements OnChanges {
   }
 
   newCel(){
-    this.navCtrl.push(NewCelPage, {parent: this.group});
+    this.navCtrl.push(NewCelPage, {parent: this.group, cel: null});
   }
 
   editCel(cel) {
