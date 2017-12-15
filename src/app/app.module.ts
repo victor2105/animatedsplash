@@ -22,6 +22,7 @@ import { ProjectPage } from '../pages/project/project';
 import { NovoProjetoPage } from '../pages/novo-projeto/novo-projeto';
 import { GroupListService } from '../services/group-list/group-list.service';
 import { CelListService } from '../services/cel-list/cel-list.service';
+import { NewCelPage } from '../pages/new-cel/new-cel';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { CelListService } from '../services/cel-list/cel-list.service';
     GaleriaPage,
     ProjectPage,
     NovoProjetoPage,
+    NewCelPage
   ],
   imports: [
     BrowserModule,
@@ -44,6 +46,7 @@ import { CelListService } from '../services/cel-list/cel-list.service';
     GaleriaPage,
     ProjectPage,
     NovoProjetoPage,
+    NewCelPage
   ],
   providers: [
     StatusBar,

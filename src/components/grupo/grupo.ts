@@ -7,6 +7,8 @@ import { Cel } from '../../models/cel';
 import { CelListService } from '../../services/cel-list/cel-list.service';
 import { Observable } from 'rxjs/Observable';
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
+import { NewCelPage } from '../../pages/new-cel/new-cel';
+import { NavController } from 'ionic-angular/navigation/nav-controller';
 
 /**
  * Generated class for the GrupoComponent component.
@@ -29,15 +31,10 @@ export class GrupoComponent implements OnChanges {
   public celList$: Observable<Cel[]>;
 
   constructor(private modalCtrl: ModalController,
-    private celDB: CelListService) {
-    // db.list('/items', ref => ref.orderByChild('size').equalTo('large'))
-    /**/
+     private navCtrl: NavController,
+    private celDB: CelListService) {  }
 
-
-  }
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(this.group);
-
     this.celList$ = this.celDB
       .getCelWithParent(this.group.key) // children of this.project
       .snapshotChanges()// key and values
@@ -46,28 +43,14 @@ export class GrupoComponent implements OnChanges {
           key: c.payload.key, ...c.payload.val()
         }))
       });
-
   }
 
-
-  newCel(name) {
-    let cel = new Cel();
-    cel.name = name;
-    cel.value = 0;
-
-    console.log(this.group);
-    // Do not save if there is no group to reference
-    if (this.group.key == null) return;
-
-    cel.parent = this.group.key;
-
-    this.celDB.add(cel)
-      .then(key => { });
+  newCel(){
+    this.navCtrl.push(NewCelPage, {parent: this.group});
   }
 
-  editCel(cel: Cel) {
-    let modal = this.modalCtrl.create(CelulaModalPage, { data: cel });
-    modal.present();
+  editCel(cel) {
+    this.navCtrl.push(NewCelPage, {parent: this.group, cel: cel});
   }
 
 }
