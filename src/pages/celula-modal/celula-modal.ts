@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController, Platform } from 'ionic-angular';
-import { Celula } from '../../models/celula';
+import { Cel } from '../../models/cel';
+import { CelListService } from '../../services/cel-list/cel-list.service';
 
 /**
  * Generated class for the CelulaModalPage page.
@@ -16,15 +17,16 @@ import { Celula } from '../../models/celula';
 })
 export class CelulaModalPage {
 
-  celula : Celula;
+  cel : Cel;
 
   constructor(
     public platform: Platform,
     public navCtrl: NavController,
     public navParams: NavParams,
-    public viewCtrl: ViewController) {
-      this.celula = this.navParams.data;
-      console.log(this.celula.nome);
+    public viewCtrl: ViewController,
+    private celDB: CelListService) {
+      this.cel = this.navParams.data;
+      console.log(this.cel.name);
   }
 
   ionViewDidLoad() {
@@ -32,8 +34,5 @@ export class CelulaModalPage {
   }
 
 
-  dismiss(){
-    this.viewCtrl.dismiss();
-  }
 
 }

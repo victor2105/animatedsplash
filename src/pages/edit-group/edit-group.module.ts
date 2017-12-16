@@ -1,13 +1,14 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { SplashPage } from './splash';
+import { EditGroupPage } from './edit-group';
+
 
 @NgModule({
   declarations: [
-    SplashPage,
+    EditGroupPage,
   ],
   imports: [
-    IonicPageModule.forChild(SplashPage),
+    IonicPageModule.forChild(EditGroupPage),
   ],
 })
-export class SplashPageModule {}
+export class EditGroupModule {}

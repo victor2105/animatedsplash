@@ -5,7 +5,8 @@ grupo {
         max-height: 70%;
     }
     .card-group {
-        background: #bbb;
+        border-radius: 0.5em;
+        background: color($colors, light);
         padding-bottom: -3px;
     }
     .card-group .list {
@@ -22,14 +23,16 @@ grupo {
     }
 
     .card-header {
+        font-weight: bold;
         background: color($colors, light);
         text-align: left;
-        padding: 0;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+        font-size: 1.0em;
+        box-shadow: 0 1px 3px rgba(42, 41, 41, 0.12), 0 1px 2px rgba(42, 41, 41, 0.12);
         transition: all 0.3s cubic-bezier(.25,.8,.25,1);
     }
 
     .button {
+        color: color($colors, secondary);
         border: 0px;
         box-shadow: 0px;       
     }
