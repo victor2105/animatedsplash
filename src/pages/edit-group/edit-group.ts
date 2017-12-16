@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Cel } from '../../models/cel';
 import { ToastService } from '../../services/toast/toast.service';
 import { GaleriaPage } from '../galeria/galeria';
-import { CelListService } from '../../services/cel-list/cel-list.service';
+import { GroupListService } from '../../services/group-list/group-list.service';
 /**
  * Generated class for the NovoProjetoPage page.
  *
@@ -13,20 +13,20 @@ import { CelListService } from '../../services/cel-list/cel-list.service';
 
 @IonicPage()
 @Component({
-  selector: 'page-new-cel',
-  templateUrl: 'new-cel.html',
+  selector: 'page-edit-group',
+  templateUrl: 'edit-group.html',
 })
-export class NewCelPage {
+export class EditGroupPage {
 
   cel: Cel;
-  parent: string;
+  parent: Cel;
 
   title: string;
   edit: boolean;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
-    private cels: CelListService,
+    private cels: GroupListService,
     private toast: ToastService) {
     this.parent = this.navParams.get('parent');
     this.cel = this.navParams.get('cel');
@@ -39,48 +39,36 @@ export class NewCelPage {
 
     if (this.cel == null) {
       this.cel = new Cel();
-      this.title = 'Nova Célula';
+      this.title = 'Novo grupo';
       this.edit = false;
       return;
     }
 
     this.edit = true;
-    this.title = 'Editar Célula';
+    this.title = 'Editar Grupo';
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad NewCelPage');
+    console.log('ionViewDidLoad EditGroupPage');
   }
 
   save(cel: Cel) {
-    
-    cel.parent = this.parent;
-
     if (!this.edit) {
       this.cels.add(cel)
         .then(ref => {
           this.showToast(cel);
-          this.navCtrl.pop();
         });
     } else {
       this.cels.edit(cel)
         .then(ref => {
           this.showToast(cel);
-          this.navCtrl.pop();
-        }).catch(() => {
-          this.errorToast();
-          this.navCtrl.pop();
         });
     }
   }
 
-  
-  errorToast() {
-    this.toast.show('Não foi possível salvar!');
-  }
-    
   showToast(cel) {
-    this.toast.show(`${cel.name} saved!`);
+    this.toast.show(`${cel.name} salvo!`);
+    this.navCtrl.pop();
   }
 
 }

@@ -3,10 +3,15 @@ import { AngularFireDatabase } from "angularfire2/database";
 import { Observable } from 'rxjs/Observable';
 
 import { Cel } from "../../models/cel";
+import { group } from "@angular/core/src/animation/dsl";
 
 
 @Injectable()
 export class CelListService {
+
+    calculate() {
+        
+    }
 
     private groupListRef$ = this.db.list<Cel>
         ('cel-list');

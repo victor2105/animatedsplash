@@ -23,6 +23,7 @@ import { NovoProjetoPage } from '../pages/novo-projeto/novo-projeto';
 import { GroupListService } from '../services/group-list/group-list.service';
 import { CelListService } from '../services/cel-list/cel-list.service';
 import { NewCelPage } from '../pages/new-cel/new-cel';
+import { EditGroupPage } from '../pages/edit-group/edit-group';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { NewCelPage } from '../pages/new-cel/new-cel';
     GaleriaPage,
     ProjectPage,
     NovoProjetoPage,
-    NewCelPage
+    NewCelPage,
+    EditGroupPage
   ],
   imports: [
     BrowserModule,
@@ -46,7 +48,8 @@ import { NewCelPage } from '../pages/new-cel/new-cel';
     GaleriaPage,
     ProjectPage,
     NovoProjetoPage,
-    NewCelPage
+    NewCelPage,
+    EditGroupPage
   ],
   providers: [
     StatusBar,
