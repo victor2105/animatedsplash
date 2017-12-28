@@ -5,6 +5,7 @@ import { Cel } from '../../models/cel';
 import { ProjectListService } from '../../services/project-list/project-list.service';
 import { ToastService } from '../../services/toast/toast.service';
 import { GaleriaPage } from '../galeria/galeria';
+import { LocalDatabaseProvider } from '../../providers/local-database/local-database';
 /**
  * Generated class for the NovoProjetoPage page.
  *
@@ -24,7 +25,9 @@ export class NovoProjetoPage {
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     private projects: ProjectListService,
-    private toast: ToastService) {
+    private localDB: LocalDatabaseProvider,
+    private toast: ToastService,
+    ) {
       this.project = new Cel();
   }
 
@@ -33,12 +36,19 @@ export class NovoProjetoPage {
   }
 
   addProject(project: Cel) {
-    project.parent = 'victorhsteste';
-    this.projects.addProject(project)
+    /*project.parent = 'victorhsteste';
+    this.projects.addProject(project) // update firebase on background
       .then(ref => {
-        this.toast.show(`${project.name} saved!`);
-        this.navCtrl.pop();
-      });
+      });*/
+    
+    this.localDB.insert(project) // save on device now
+    .then(() => {        
+      this.toast.show(`${project.name} saved!`);
+      this.navCtrl.pop();
+    })
+    .catch(e => {
+      console.log(e);
+    });    
   }
 
 }

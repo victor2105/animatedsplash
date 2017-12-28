@@ -22,12 +22,17 @@ export class GroupListService {
         return this.groupListRef$.push(group);
     }
 
-    edit(group: Cel) {
+    update(group: Cel) {
         return this.groupListRef$.update(group.key, group);
     }
 
-    getCelWithParent(parent){
+    getCelWithParent(parent) {
         return this.db.list('group-list', ref => ref.orderByChild('parent').equalTo(parent));
     }
+
+    remove(group: Cel){
+        return this.groupListRef$.remove(group.key);
+    }
+
 
 }

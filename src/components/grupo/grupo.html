@@ -1,11 +1,11 @@
 <ion-card class="card card-group">
-  <ion-card-header (click)="editGroup()" class="card-header" style="align-content: left">
+  <ion-card-header (click)="selectGroup(group)" class="card-header" style="align-content: left">
     {{group.name}} - {{group.value}}
   </ion-card-header>
   <ion-list class="list">
     <div class="scroll-group">
       <ion-card class="card little-card" *ngFor="let cel of celList$ | async" color="light">
-        <celula [cel]="cel" (click)="editCel(cel)" ></celula>
+        <celula [cel]="cel" (click)="selectCel(cel)" ></celula>
       </ion-card>
     </div>
   </ion-list>

@@ -24,6 +24,8 @@ import { GroupListService } from '../services/group-list/group-list.service';
 import { CelListService } from '../services/cel-list/cel-list.service';
 import { NewCelPage } from '../pages/new-cel/new-cel';
 import { EditGroupPage } from '../pages/edit-group/edit-group';
+import { IonicStorageModule } from '@ionic/storage';
+import { LocalDatabaseProvider } from '../providers/local-database/local-database';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,8 @@ import { EditGroupPage } from '../pages/edit-group/edit-group';
     BrowserModule,
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(FIREBASE_CREDENTIALS),
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -60,7 +63,8 @@ import { EditGroupPage } from '../pages/edit-group/edit-group';
     ProjectListService,
     GroupListService,
     CelListService,
-    ToastService 
+    ToastService,
+    LocalDatabaseProvider 
   ]
 })
 export class AppModule {}

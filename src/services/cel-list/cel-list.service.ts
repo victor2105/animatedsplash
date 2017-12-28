@@ -31,6 +31,10 @@ export class CelListService {
         return this.groupListRef$.update(group.key, group);
     }
 
+    remove(group: Cel){
+        return this.groupListRef$.remove(group.key);
+    }
+
     getCelWithParent(parent){
         if(parent == null) return this.groupListRef$;
         return this.db.list('cel-list', ref => ref.orderByChild('parent').equalTo(parent));

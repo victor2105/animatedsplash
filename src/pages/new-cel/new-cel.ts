@@ -24,6 +24,8 @@ export class NewCelPage {
   title: string;
   edit: boolean;
 
+  callback;
+
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     private cels: CelListService,
@@ -47,6 +49,13 @@ export class NewCelPage {
     this.edit = true;
     this.title = 'Editar Célula';
   }
+
+  ionViewWillEnter() {
+    this.callback = this.navParams.get("callback")
+  }
+  ionViewWillLeave() {
+    this.callback();
+}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad NewCelPage');
