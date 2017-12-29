@@ -24,23 +24,27 @@ import { GroupListService } from '../services/group-list/group-list.service';
 import { CelListService } from '../services/cel-list/cel-list.service';
 import { NewCelPage } from '../pages/new-cel/new-cel';
 import { EditGroupPage } from '../pages/edit-group/edit-group';
+import { AuthProvider } from '../providers/auth/auth';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 
 @NgModule({
   declarations: [
-    MyApp,
     GrupoComponent,
     CelulaComponent,
+    
+    MyApp,
     GaleriaPage,
     ProjectPage,
     NovoProjetoPage,
     NewCelPage,
-    EditGroupPage
+    EditGroupPage,
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(FIREBASE_CREDENTIALS),
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    AngularFireAuthModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -49,7 +53,7 @@ import { EditGroupPage } from '../pages/edit-group/edit-group';
     ProjectPage,
     NovoProjetoPage,
     NewCelPage,
-    EditGroupPage
+    EditGroupPage,
   ],
   providers: [
     StatusBar,
@@ -60,7 +64,8 @@ import { EditGroupPage } from '../pages/edit-group/edit-group';
     ProjectListService,
     GroupListService,
     CelListService,
-    ToastService 
+    ToastService,
+    AuthProvider
   ]
 })
 export class AppModule {}
