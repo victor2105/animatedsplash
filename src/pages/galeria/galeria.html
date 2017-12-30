@@ -9,23 +9,22 @@
   <ion-navbar color="primary">
     <ion-title>Galeria</ion-title>
     <ion-buttons end>
-      <button ion-button (click)="newProject()" >
+      <button ion-button (click)="newProject()">
         <ion-icon name="add" showWhen="android,windows"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
-
 </ion-header>
 
 
-<ion-content padding>
-
-  <ion-list>
-    <ion-list-header>
-      Projetos
-    </ion-list-header>
-    <ion-item *ngFor="let project of projectList$ | async" (click)="editProject(project)">
-      {{project.name}}
-    </ion-item>
-  </ion-list>
+<ion-content>
+  <ion-item-group>
+    <ion-item-divider color="light">Seus Projetos</ion-item-divider>
+    <ion-list>
+      <ion-item *ngFor="let project of projectList$ | async" (click)="editProject(project)">
+        <ion-icon larg name="leaf" item-start></ion-icon>
+        {{project.name}}
+      </ion-item>
+    </ion-list>
+  </ion-item-group>
 </ion-content>

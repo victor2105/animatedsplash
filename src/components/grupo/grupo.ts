@@ -49,6 +49,7 @@ export class GrupoComponent implements OnChanges {
           key: c.payload.key, ...c.payload.val()
         }))
       });
+    this.calculate();
   }
 
   newCel() {
@@ -145,8 +146,18 @@ export class GrupoComponent implements OnChanges {
     });
   }
 
-  calculate(group: Cel) {
+  calculate() {
+    let sum: number = 0;
+    console.log("calculate");
+    this.celList$.forEach((array: Cel[]) => {
+      array.forEach((value: Cel, index: number, array: Cel[]) => {
+        sum = Number(sum) + Number(value.value);
+      })
 
+      this.group.value = sum;
+      this.groupDB.update(this.group);
+      return sum;
+    })
   }
 
 }

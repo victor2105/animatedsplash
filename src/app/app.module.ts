@@ -35,7 +35,6 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
     CelulaComponent,
     
     MyApp,
-    GaleriaPage,
     ProjectPage,
     NovoProjetoPage,
     NewCelPage,
@@ -46,13 +45,12 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(FIREBASE_CREDENTIALS),
     AngularFireDatabaseModule,
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
     AngularFireAuthModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    GaleriaPage,
     ProjectPage,
     NovoProjetoPage,
     NewCelPage,
