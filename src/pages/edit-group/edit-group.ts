@@ -59,7 +59,7 @@ export class EditGroupPage {
           this.showToast(cel);
         });
     } else {
-      this.cels.edit(cel)
+      this.cels.update(cel)
         .then(ref => {
           this.showToast(cel);
         });

@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ActionSheetController } from 'ionic-angular';
 import { Cel } from '../../models/cel';
 import { Grupo } from '../../models/grupo';
 import { ProjectListService } from '../../services/project-list/project-list.service';
 import { ToastService } from '../../services/toast/toast.service';
 import { Observable } from 'rxjs/Observable';
 import { GroupListService } from '../../services/group-list/group-list.service';
+import { EditGroupPage } from '../edit-group/edit-group';
 
 /**
  * Generated class for the ProjectPage page.
@@ -26,6 +27,7 @@ export class ProjectPage {
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
+    public actionSheet: ActionSheetController,
     public projectDB: ProjectListService,
     private groupDB: GroupListService,
     private toast: ToastService) {
@@ -70,7 +72,6 @@ export class ProjectPage {
       
     });
   }
-
 
 
 }

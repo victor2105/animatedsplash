@@ -1,4 +1,5 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { ActionSheetController, NavParams } from 'ionic-angular';
 import { Grupo } from '../../models/grupo';
 import { CelulaComponent } from '../celula/celula';
 import { ModalController } from 'ionic-angular';
@@ -33,9 +34,11 @@ export class GrupoComponent implements OnChanges {
   public celList$: Observable<Cel[]>;
 
   constructor(private modalCtrl: ModalController,
-     private navCtrl: NavController,
-     private groupDB: GroupListService,
-    private celDB: CelListService) {  }
+    private actionSheet: ActionSheetController,
+    private navCtrl: NavController,
+    private navParams: NavParams,
+    private groupDB: GroupListService,
+    private celDB: CelListService) { }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.celList$ = this.celDB
@@ -48,31 +51,102 @@ export class GrupoComponent implements OnChanges {
       });
   }
 
-  newCel(){
-    this.navCtrl.push(NewCelPage, {parent: this.group.key, cel: null});
+  newCel() {
+    this.navCtrl.push(NewCelPage, { parent: this.group.key, cel: null, callback: this.mySumAllCallback });
   }
 
   editCel(cel) {
-    this.navCtrl.push(NewCelPage, {parent: this.group.key, cel: cel})
-    .then(() => {
+    this.navCtrl.push(NewCelPage, { parent: this.group.key, cel: cel, callback: this.mySumAllCallback })
+      .then(() => {
+      });
+  }
+  
+  selectGroup() {
+    this.actionSheet.create({
+      title: `${this.group.name}`,
+      buttons : [
+        {
+          text: 'Editar',
+          handler: () => {
+            this.editGroup();
+          }
+        },
+        {
+          text: 'Deletar',
+          role: 'destructive',
+          handler: () => {
+            this.groupDB.remove(this.group)
+            .then(() => {
+
+            })            
+          }
+        },
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {
+            console.log('The user has selected thte cancel button')
+          }
+        }
+      ]
+    }).present();
+  }
+
+  selectCel(cel: Cel) {
+    this.actionSheet.create({
+      title: `${cel.name}`,
+      buttons : [
+        {
+          text: 'Editar',
+          handler: () => {
+            this.editCel(cel);
+          }
+        },
+        {
+          text: 'Deletar',
+          role: 'destructive',
+          handler: () => {
+            // Delete the current cel
+            this.celDB.remove(cel)
+            .then(() => {
+              this.mySumAllCallback();
+            });
+
+          }
+        },
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {
+            console.log('The user has selected thte cancel button')
+          }
+        }
+      ]
+    }).present();
+  }
+
+  editGroup() {
+    this.navCtrl.push(EditGroupPage, { parent: this.group.parent, cel: this.group })
+  }
+
+  mySumAllCallback = () => {
+    return new Promise((resolve, reject) => {
+      let sum: number = 0;
+      console.log("calculate");
+      this.celList$.forEach((array: Cel[]) => {
+        array.forEach((value: Cel, index: number, array: Cel[]) => {
+          sum = Number(sum) + Number(value.value);
+        })
+
+        this.group.value = sum;
+        this.groupDB.update(this.group);
+        return sum;
+      })
     });
   }
 
-  editGroup(){
-    this.navCtrl.push(EditGroupPage, {parent: this.group.parent, cel: this.group})
-  }
+  calculate(group: Cel) {
 
-  calculate(group: Cel){
-    let sum = 0;
-    this.celList$.forEach((array : Cel[]) => {
-      array.forEach( (value: Cel, index: number, array: Cel[]) => {
-        sum = sum + value.value;
-      } )
-      return sum;
-    }).then( () => {
-      group.value = sum;
-      
-    });
   }
 
 }
