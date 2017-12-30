@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { ActionSheetController, NavParams } from 'ionic-angular';
+import { ActionSheetController, NavParams, AlertController } from 'ionic-angular';
 import { Grupo } from '../../models/grupo';
 import { CelulaComponent } from '../celula/celula';
 import { ModalController } from 'ionic-angular';
@@ -35,6 +35,7 @@ export class GrupoComponent implements OnChanges {
 
   constructor(private modalCtrl: ModalController,
     private actionSheet: ActionSheetController,
+    private alertCtrl: AlertController,
     private navCtrl: NavController,
     private navParams: NavParams,
     private groupDB: GroupListService,
@@ -76,10 +77,11 @@ export class GrupoComponent implements OnChanges {
           text: 'Deletar',
           role: 'destructive',
           handler: () => {
-            this.groupDB.remove(this.group)
-            .then(() => {
-
-            })            
+            this.showConfirmation('Deseja realmente apagar este grupo?', () => {
+              this.groupDB.remove(this.group)
+              .then(() => {
+              });  
+            });                     
           }
         },
         {
@@ -91,6 +93,29 @@ export class GrupoComponent implements OnChanges {
         }
       ]
     }).present();
+  }
+
+  showConfirmation(message: string, yesAction) {
+    let prompt = this.alertCtrl.create({
+      title: 'Confirmação',
+      message: message,
+      buttons: [
+        {
+          text: 'Cancelar',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Sim',
+          handler: data => {
+            console.log('Yes clicked');
+            yesAction();
+          }
+        }
+      ]
+    });
+    prompt.present();
   }
 
   selectCel(cel: Cel) {
