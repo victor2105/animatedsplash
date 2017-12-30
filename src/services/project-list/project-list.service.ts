@@ -27,4 +27,10 @@ export class ProjectListService {
         return this.projectListRef$.update(project.key, project);
     }
 
+    getUserProjects(userEmail){
+        console.log(userEmail);
+        if(userEmail == null) return this.projectListRef$;
+        return this.db.list('project-list', ref => ref.orderByChild('parent').equalTo(userEmail));
+    }
+
 }

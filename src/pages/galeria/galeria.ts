@@ -9,6 +9,7 @@ import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 import { ProjectPage } from '../project/project';
 import { NovoProjetoPage } from '../novo-projeto/novo-projeto';
+import { AuthProvider } from '../../providers/auth/auth';
 /**
  * Generated class for the GaleriaPage page.
  *
@@ -23,14 +24,20 @@ import { NovoProjetoPage } from '../novo-projeto/novo-projeto';
 })
 export class GaleriaPage {
 
+  email: string;
   projectList$ : Observable<Cel[]> ;
 
 
-  constructor(public navCtrl: NavController,
+  constructor(
+    public navCtrl: NavController,
+    public authCtrl: AuthProvider,
     public navParams: NavParams,
     private projectListService : ProjectListService) {
+
+      this.email = authCtrl.getUserEmail();
+
       this.projectList$ = this.projectListService
-      .getProjectList() // DB LIST 
+      .getUserProjects(this.email) 
       .snapshotChanges()// key and values
       .map(changes => {
         return changes.map(c => ({

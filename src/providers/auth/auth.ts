@@ -5,7 +5,14 @@ import firebase from 'firebase/app';
 @Injectable()
 export class AuthProvider {
 
+  email: any;
+
   constructor(public afAuth: AngularFireAuth) { }
+
+  getUserEmail() {
+    return this.email;
+  }
+  
 
   loginEmailPassword(newEmail: string, newPassword: string): Promise<any> {
     return this.afAuth.auth.signInWithEmailAndPassword(newEmail, newPassword);

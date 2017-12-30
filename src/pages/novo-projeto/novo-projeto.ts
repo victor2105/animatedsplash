@@ -5,12 +5,7 @@ import { Cel } from '../../models/cel';
 import { ProjectListService } from '../../services/project-list/project-list.service';
 import { ToastService } from '../../services/toast/toast.service';
 import { GaleriaPage } from '../galeria/galeria';
-/**
- * Generated class for the NovoProjetoPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { AuthProvider } from '../../providers/auth/auth';
 
 @IonicPage()
 @Component({
@@ -19,13 +14,17 @@ import { GaleriaPage } from '../galeria/galeria';
 })
 export class NovoProjetoPage {
 
+  email: string;
   project: Cel;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
+    public authCtrl: AuthProvider,
     private projects: ProjectListService,
     private toast: ToastService) {
       this.project = new Cel();
+
+      this.email = authCtrl.getUserEmail();
   }
 
   ionViewDidLoad() {
@@ -33,7 +32,7 @@ export class NovoProjetoPage {
   }
 
   addProject(project: Cel) {
-    project.parent = 'victorhsteste';
+    project.parent = this.authCtrl.getUserEmail();
     this.projects.addProject(project)
       .then(ref => {
         this.toast.show(`${project.name} saved!`);
