@@ -26,17 +26,20 @@ import { NewCelPage } from '../pages/new-cel/new-cel';
 import { EditGroupPage } from '../pages/edit-group/edit-group';
 import { IonicStorageModule } from '@ionic/storage';
 import { LocalDatabaseProvider } from '../providers/local-database/local-database';
+import { AuthProvider } from '../providers/auth/auth';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 
 @NgModule({
   declarations: [
-    MyApp,
     GrupoComponent,
     CelulaComponent,
+    
+    MyApp,
     GaleriaPage,
     ProjectPage,
     NovoProjetoPage,
     NewCelPage,
-    EditGroupPage
+    EditGroupPage,
   ],
   imports: [
     BrowserModule,
@@ -44,6 +47,7 @@ import { LocalDatabaseProvider } from '../providers/local-database/local-databas
     AngularFireModule.initializeApp(FIREBASE_CREDENTIALS),
     AngularFireDatabaseModule,
     IonicStorageModule.forRoot()
+    AngularFireAuthModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -52,7 +56,7 @@ import { LocalDatabaseProvider } from '../providers/local-database/local-databas
     ProjectPage,
     NovoProjetoPage,
     NewCelPage,
-    EditGroupPage
+    EditGroupPage,
   ],
   providers: [
     StatusBar,
@@ -64,7 +68,8 @@ import { LocalDatabaseProvider } from '../providers/local-database/local-databas
     GroupListService,
     CelListService,
     ToastService,
-    LocalDatabaseProvider 
+    LocalDatabaseProvider,
+    AuthProvider
   ]
 })
 export class AppModule {}

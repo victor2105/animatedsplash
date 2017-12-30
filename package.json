@@ -26,6 +26,7 @@
     "@ionic/storage": "^2.0.1",
     "angularfire2": "^5.0.0-rc.4",
     "cordova-android": "~6.3.0",
+    "cordova-plugin-buildinfo": "^2.0.1",
     "cordova-plugin-device": "^1.1.4",
     "cordova-plugin-firebase": "^0.1.24",
     "cordova-plugin-ionic-webview": "^1.1.16",
@@ -54,6 +55,7 @@
       "cordova-plugin-ionic-webview": {},
       "cordova-plugin-firebase": {},
       "cordova-sqlite-storage": {}
+      "cordova-plugin-buildinfo": {}
     },
     "platforms": [
       "android"
