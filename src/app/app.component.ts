@@ -5,6 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { GaleriaPage } from '../pages/galeria/galeria';
 import { LoginPage } from '../pages/login/login';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { AuthProvider } from '../providers/auth/auth';
 
 
 @Component({
@@ -18,10 +19,12 @@ export class MyApp {
     statusBar: StatusBar,
     splashScreen: SplashScreen,
     modalCtrl: ModalController,
+    authCtrl: AuthProvider,
     afAuth: AngularFireAuth) {
 
       const authObserver = afAuth.authState.subscribe( user => {
         if (user) {
+          authCtrl.email = user.email;
           this.rootPage = 'GaleriaPage';
           authObserver.unsubscribe();
         } else {
