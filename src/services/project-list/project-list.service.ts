@@ -9,13 +9,31 @@ import { Cel } from "../../models/cel";
 @Injectable()
 export class ProjectListService {
 
-    private projectListRef$ = this.db.list<Cel>
-    ( 'project-list' );
+    projectList$: Observable<Cel[]>;
 
-    constructor (private db: AngularFireDatabase) {
+    private projectListRef$ = this.db.list<Cel>
+        ('project-list');
+
+    constructor(private db: AngularFireDatabase) {
+        
+        
     }
 
-    getProjectList () {
+    loadUserProjects(email) {
+        this.projectList$ = this.getProjects(email)
+            .snapshotChanges()// key and values
+            .map(changes => {
+                return changes.map(c => ({
+                    key: c.payload.key, ...c.payload.val()
+                }))
+            });
+    }
+
+    getObservable() {
+        return this.projectList$;
+    }
+
+    getProjectList() {
         return this.projectListRef$;
     }
 
@@ -27,9 +45,9 @@ export class ProjectListService {
         return this.projectListRef$.update(project.key, project);
     }
 
-    getUserProjects(userEmail){
+    getProjects(userEmail) {
         console.log(userEmail);
-        if(userEmail == null) return this.projectListRef$;
+        if (userEmail == null) return this.projectListRef$;
         return this.db.list('project-list', ref => ref.orderByChild('parent').equalTo(userEmail));
     }
 
