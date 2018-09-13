@@ -17,8 +17,6 @@ export class CelulaComponent {
   cel: Cel;
 
   constructor() {
-    console.log('Hello CelulaComponent Component');
-    //console.log(this.celula.nome);
   }
 
 }

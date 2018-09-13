@@ -1,5 +1,5 @@
 export class Cel {
-    key? : string;
+    key : string;
     parent : string;
     name: string;
     value: number;

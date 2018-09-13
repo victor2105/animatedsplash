@@ -26,11 +26,9 @@ export class CelulaModalPage {
     public viewCtrl: ViewController,
     private celDB: CelListService) {
       this.cel = this.navParams.data;
-      console.log(this.cel.name);
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad CelulaModalPage');
   }
 
 

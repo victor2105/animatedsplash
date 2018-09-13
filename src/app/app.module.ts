@@ -28,6 +28,7 @@ import { IonicStorageModule } from '@ionic/storage';
 import { LocalDatabaseProvider } from '../providers/local-database/local-database';
 import { AuthProvider } from '../providers/auth/auth';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { GaleriaPageModule } from '../pages/galeria/galeria.module';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
   ],
   imports: [
     BrowserModule,
+    GaleriaPageModule,
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(FIREBASE_CREDENTIALS),
     AngularFireDatabaseModule,

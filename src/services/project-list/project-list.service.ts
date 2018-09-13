@@ -9,14 +9,13 @@ import { Cel } from "../../models/cel";
 @Injectable()
 export class ProjectListService {
 
+    // project-list
     projectList$: Observable<Cel[]>;
 
-    private projectListRef$ = this.db.list<Cel>
-        ('project-list');
+    private projectListRef$;
 
     constructor(private db: AngularFireDatabase) {
-        
-        
+        this.projectListRef$ = this.db.list<Cel>('project-list');
     }
 
     loadUserProjects(email) {
@@ -48,7 +47,7 @@ export class ProjectListService {
     getProjects(userEmail) {
         console.log(userEmail);
         if (userEmail == null) return this.projectListRef$;
-        return this.db.list('project-list', ref => ref.orderByChild('parent').equalTo(userEmail));
+        return this.db.list<Cel>('project-list', ref => ref.orderByChild('parent').equalTo(userEmail));
     }
 
 }

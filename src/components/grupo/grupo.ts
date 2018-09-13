@@ -1,18 +1,14 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { ActionSheetController, NavParams, AlertController } from 'ionic-angular';
-import { Grupo } from '../../models/grupo';
-import { CelulaComponent } from '../celula/celula';
 import { ModalController } from 'ionic-angular';
-import { CelulaModalPage } from '../../pages/celula-modal/celula-modal';
 import { Cel } from '../../models/cel';
 import { CelListService } from '../../services/cel-list/cel-list.service';
 import { Observable } from 'rxjs/Observable';
-import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import { NewCelPage } from '../../pages/new-cel/new-cel';
 import { NavController } from 'ionic-angular/navigation/nav-controller';
 import { EditGroupPage } from '../../pages/edit-group/edit-group';
 import { GroupListService } from '../../services/group-list/group-list.service';
-
+import 'rxjs/add/operator/map';
 /**
  * Generated class for the GrupoComponent component.
  *
@@ -31,7 +27,7 @@ export class GrupoComponent implements OnChanges {
 
   editarTitulo: boolean;
 
-  public celList$: Observable<Cel[]>;
+  public celList$: Observable<any[]>;
 
   constructor(private modalCtrl: ModalController,
     private actionSheet: ActionSheetController,
@@ -88,7 +84,6 @@ export class GrupoComponent implements OnChanges {
           text: 'Cancelar',
           role: 'cancel',
           handler: () => {
-            console.log('The user has selected thte cancel button')
           }
         }
       ]
@@ -103,13 +98,11 @@ export class GrupoComponent implements OnChanges {
         {
           text: 'Cancelar',
           handler: data => {
-            console.log('Cancel clicked');
           }
         },
         {
           text: 'Sim',
           handler: data => {
-            console.log('Yes clicked');
             yesAction();
           }
         }
@@ -144,7 +137,6 @@ export class GrupoComponent implements OnChanges {
           text: 'Cancelar',
           role: 'cancel',
           handler: () => {
-            console.log('The user has selected thte cancel button')
           }
         }
       ]
@@ -158,7 +150,6 @@ export class GrupoComponent implements OnChanges {
   mySumAllCallback = () => {
     return new Promise((resolve, reject) => {
       let sum: number = 0;
-      console.log("calculate");
       this.celList$.forEach((array: Cel[]) => {
         array.forEach((value: Cel, index: number, array: Cel[]) => {
           sum = Number(sum) + Number(value.value);
@@ -173,7 +164,6 @@ export class GrupoComponent implements OnChanges {
 
   calculate() {
     let sum: number = 0;
-    console.log("calculate");
     this.celList$.forEach((array: Cel[]) => {
       array.forEach((value: Cel, index: number, array: Cel[]) => {
         sum = Number(sum) + Number(value.value);

@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import 'rxjs/add/operator/map';
 import { Storage } from '@ionic/storage';
 import { DatePipe } from '@angular/common';
 import { Cel } from '../../models/cel';
