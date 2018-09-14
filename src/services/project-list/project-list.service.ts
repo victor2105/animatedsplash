@@ -44,6 +44,10 @@ export class ProjectListService {
         return this.projectListRef$.update(project.key, project);
     }
 
+    remove(project: Cel){
+        return this.projectListRef$.remove(project.key);
+    }
+
     getProjects(userEmail) {
         console.log(userEmail);
         if (userEmail == null) return this.projectListRef$;

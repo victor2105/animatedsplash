@@ -26,6 +26,8 @@ export class NewCelPage {
 
   callback;
 
+  disableButton = false;
+
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     private cels: CelListService,
@@ -62,6 +64,7 @@ export class NewCelPage {
   }
 
   save(cel: Cel) {
+    this.disableButton = true;
     
     cel.parent = this.parent;
 
@@ -70,13 +73,18 @@ export class NewCelPage {
         .then(ref => {
           this.showToast(cel);
           this.navCtrl.pop();
-        });
+        }, () => {
+          this.disableButton = false;
+          this.errorToast();
+          this.navCtrl.pop();
+        });        
     } else {
       this.cels.edit(cel)
         .then(ref => {
           this.showToast(cel);
           this.navCtrl.pop();
         }).catch(() => {
+          this.disableButton = false;
           this.errorToast();
           this.navCtrl.pop();
         });

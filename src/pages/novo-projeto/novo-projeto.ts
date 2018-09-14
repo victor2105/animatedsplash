@@ -17,6 +17,8 @@ export class NovoProjetoPage {
   email: string;
   project: Cel;
 
+  disableButton = false;
+
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public authCtrl: AuthProvider,
@@ -36,6 +38,9 @@ export class NovoProjetoPage {
     this.projects.addProject(project)
       .then(ref => {
         this.toast.show(`${project.name} saved!`);
+        this.navCtrl.pop();
+      }, err => {
+        this.toast.show(`Could not create the project.`);
         this.navCtrl.pop();
       });
   }

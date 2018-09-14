@@ -1,9 +1,9 @@
 <ion-card class="card card-group">
   <ion-card-header (click)="selectGroup(group)" class="card-header" style="align-content: left">
       {{group.name}}
-      <ion-badge style="float: right;" color="secondary" item-end>{{group.value | number: '1.2'}}</ion-badge>
-    
+      <ion-badge style="float: right;" [color]="group.value > 0 ? 'secondary' : group.value < 0 ? 'danger' : 'primary'" item-end>{{group.value | number: '1.2'}}</ion-badge>
   </ion-card-header>
+
   <ion-list class="list">
     <div class="scroll-group">
       <ion-card class="card little-card" *ngFor="let cel of celList$ | async" color="light">

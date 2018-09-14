@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, List } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, List, ActionSheetController, AlertController } from 'ionic-angular';
 import { Project } from '../../models/projeto';
 import { ProjectProvider } from '../../providers/project/project';
 import { ProjectListService } from '../../services/project-list/project-list.service';
@@ -19,11 +19,14 @@ export class GaleriaPage {
 
   email: string;
   projectList$ : Observable<Cel[]> ;
+  project: Cel;
 
 
   constructor(
     public navCtrl: NavController,
     public authCtrl: AuthProvider,
+    private alertCtrl: AlertController,
+    private actionSheet: ActionSheetController,
     public navParams: NavParams,
     private projectCtrl : ProjectListService)
   {
@@ -35,8 +38,65 @@ export class GaleriaPage {
     this.navCtrl.push(NovoProjetoPage);
   }
 
-  editProject(project) {
+
+
+  openProject(project) {
     this.navCtrl.push(ProjectPage, {project: project});
+  }
+
+  selectProject(project) {
+    this.project = project;
+    this.actionSheet.create({
+      title: `${this.project.name}`,
+      buttons : [
+        {
+          text: 'Abrir',
+          handler: () => {
+            this.openProject(this.project);
+          }
+        },
+        {
+          text: 'Deletar',
+          role: 'destructive',
+          handler: () => {
+            this.showConfirmation('Deseja realmente apagar este projeto?', () => {
+              
+              this.projectCtrl.remove(this.project)
+              .then(() => {
+
+              });  
+            });                     
+          }
+        },
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {
+          }
+        }
+      ]
+    }).present();
+  }
+
+  showConfirmation(message: string, yesAction) {
+    let prompt = this.alertCtrl.create({
+      title: 'Confirmação',
+      message: message,
+      buttons: [
+        {
+          text: 'Cancelar',
+          handler: data => {
+          }
+        },
+        {
+          text: 'Sim',
+          handler: data => {
+            yesAction();
+          }
+        }
+      ]
+    });
+    prompt.present();
   }
 
 }

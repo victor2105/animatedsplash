@@ -25,5 +25,5 @@
       <ion-input [(ngModel)]="project.name" placeholder="Planejamento Financeiro"></ion-input>
   </ion-item>
 
-  <button ion-button block clear (click)="addProject(project)">Salvar</button>
+  <button ion-button block clear [disabled]="disableButton" (click)="disableButton = true; addProject(project)">Salvar</button>
 </ion-content>

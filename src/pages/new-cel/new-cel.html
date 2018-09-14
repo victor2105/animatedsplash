@@ -29,5 +29,5 @@
 
   </ion-list>
 
-  <button ion-button clear (click)="save(cel)">Salvar</button>
+  <button ion-button clear [disabled]="disableButton" (click)="disableButton = true; save(cel)">Salvar</button>
 </ion-content>

@@ -1,6 +1,6 @@
 <ion-list>
   <ion-item>
     {{cel.name}}
-    <ion-badge item-end>{{cel.value | number: '1.2'}}</ion-badge>    
+    <ion-badge [color]="cel.value > 0 ? 'secondary' : cel.value < 0 ? 'danger' : 'light'" item-end>{{cel.value | number: '1.2'}}</ion-badge>    
   </ion-item>
 </ion-list>
