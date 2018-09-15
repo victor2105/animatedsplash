@@ -64,6 +64,8 @@ export class GaleriaPage {
               this.projectCtrl.remove(this.project)
               .then(() => {
 
+              }).catch(() => {
+        
               });  
             });                     
           }
