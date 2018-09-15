@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Celula } from '../../models/celula';
+import { Cel } from '../../models/cel';
 
 /**
  * Generated class for the CelulaComponent component.
@@ -14,11 +14,9 @@ import { Celula } from '../../models/celula';
 export class CelulaComponent {
 
   @Input()
-  celula: Celula;
+  cel: Cel;
 
   constructor() {
-    console.log('Hello CelulaComponent Component');
-    //console.log(this.celula.nome);
   }
 
 }

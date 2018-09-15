@@ -1,14 +1,16 @@
-<ion-card class="card card-group" color="primary">
-  <ion-card-header>
-    <p (click)="btnEditarTitulo()">{{grupo.nome}}</p>
-    <input *ngIf="editarTitulo" type="text" name="text" ng-model="grupo.nome">
-    
+<ion-card class="card card-group">
+  <ion-card-header (click)="selectGroup(group)" class="card-header" style="align-content: left">
+      {{group.name}}
+      <ion-badge style="float: right;" [color]="group.value > 0 ? 'secondary' : group.value < 0 ? 'danger' : 'primary'" item-end>{{group.value | number: '1.2'}}</ion-badge>
   </ion-card-header>
-  <ion-list>
-    <ion-card class="card little-card"  *ngFor="let celula of grupo.celulas" color="light">
-      <celula [celula]="celula"></celula>
-    </ion-card>
-  </ion-list>
 
-  <button ion-button block (click)="novaCelula()">Adicionar</button>
+  <ion-list class="list">
+    <div class="scroll-group">
+      <ion-card class="card little-card" *ngFor="let cel of celList$ | async" color="light">
+        <celula [cel]="cel" (click)="selectCel(cel)"></celula>
+      </ion-card>
+    </div>
+  </ion-list>
+  <button class="button" ion-button clear (click)="newCel()">Adicionar</button>
+
 </ion-card>

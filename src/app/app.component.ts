@@ -2,22 +2,45 @@ import { Component } from '@angular/core';
 import { Platform, ModalController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { GaleriaPage } from '../pages/galeria/galeria';
+import { LoginPage } from '../pages/login/login';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { AuthProvider } from '../providers/auth/auth';
+import { ProjectListService } from '../services/project-list/project-list.service';
 
-import { TabsPage } from '../pages/tabs/tabs';
-import { SplashPage } from '../pages/splash/splash';
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  public rootPage:TabsPage;
+  public rootPage;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, modalCtrl: ModalController) {
+  constructor(
+    platform: Platform,
+    statusBar: StatusBar,
+    splashScreen: SplashScreen,
+    modalCtrl: ModalController,
+    projectCtrl: ProjectListService,
+    authCtrl: AuthProvider,
+    afAuth: AngularFireAuth) {
+
+      const authObserver = afAuth.authState.subscribe( user => {
+        if (user) {
+          authCtrl.email = user.email;
+          projectCtrl.loadUserProjects(user.email);
+          this.rootPage = 'GaleriaPage';
+          authObserver.unsubscribe();
+        } else {
+          this.rootPage = 'LoginPage';
+          authObserver.unsubscribe();
+        }
+      });
+
     platform.ready().then(() => {
+      // Okay, so the platform is ready and our plugins are available.
+      // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
-      //splashScreen.hide();
-      let splash = modalCtrl.create(SplashPage);
-      splash.present();
+      splashScreen.hide();
     });
   }
 }
