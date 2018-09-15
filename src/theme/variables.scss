@@ -42,6 +42,13 @@ $colors: (
 );
 
 
+.primary { background: color($colors, primary); }
+.secondary {background: color($colors, secondary); }
+.danger { background: color($colors, danger); }
+.light { background: color($colors, light); }
+.dark { background: color($colors, dark); }
+
+
 // App iOS Variables
 // --------------------------------------------------
 // iOS only Sass variables can go here

@@ -5,6 +5,7 @@ export class Cel {
     value: number;
     function: string;
     check: boolean;
+    background?: string;
     children?: any[];
     listeners?: any[];
 }

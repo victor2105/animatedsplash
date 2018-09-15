@@ -14,35 +14,78 @@ import { AuthProvider } from '../../providers/auth/auth';
 })
 export class NovoProjetoPage {
 
+  editMode = false;
+
   email: string;
   project: Cel;
 
   disableButton = false;
+
+  colors = [
+    { class: 'primary', value: '#488aff' },
+    { class: 'secondary', value: '#32db64' },
+    { class: 'danger', value: '#f53d3d' },
+    { class: 'light', value: '#f4f4f4' },
+    { class: 'dark', value: '#222222' }
+  ];
+
+  getBackgroundColor(color){
+    return "background-color: "+color;";";
+  }
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public authCtrl: AuthProvider,
     private projects: ProjectListService,
     private toast: ToastService) {
-      this.project = new Cel();
 
+      this.project = this.navParams.get('project');
+
+      if(!this.project){
+        this.project = new Cel();
+      }else{
+        this.editMode = true;
+      }
       this.email = authCtrl.getUserEmail();
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad NovoProjetoPage');
+  }
+
+  finish(project: Cel) {
+    project.parent = this.authCtrl.getUserEmail();
+    if(this.editMode){
+      this.saveProject(project);
+    }else{
+      this.addProject(project);
+    }
+  }
+
+  saveProject(project: Cel) {
+    this.projects.editProject(project)
+    .then(ref => {
+      this.toast.show(`${project.name} salvo!`);
+      this.navCtrl.pop();
+    }, err => {        
+      this.toast.show(`Não foi possível salvar o projeto.`);
+      this.navCtrl.pop();
+    });
   }
 
   addProject(project: Cel) {
-    project.parent = this.authCtrl.getUserEmail();
     this.projects.addProject(project)
-      .then(ref => {
-        this.toast.show(`${project.name} saved!`);
-        this.navCtrl.pop();
-      }, err => {
-        this.toast.show(`Could not create the project.`);
-        this.navCtrl.pop();
-      });
+    .then(ref => {
+      this.toast.show(`${project.name} criado!`);
+      this.navCtrl.pop();
+    }, err => {
+      this.toast.show(`Não foi possível criar o projeto.`);
+      this.navCtrl.pop();
+    });
+  }
+
+  setBackgroundColor(color: any) {
+    console.log(color);
+    this.project.background = color.class;
   }
 
 }
