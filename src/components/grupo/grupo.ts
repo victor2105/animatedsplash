@@ -56,6 +56,9 @@ export class GrupoComponent implements OnChanges {
   editCel(cel) {
     this.navCtrl.push(NewCelPage, { parent: this.group.key, cel: cel, callback: this.mySumAllCallback })
       .then(() => {
+      })
+      .catch(() => {
+
       });
   }
   
@@ -76,7 +79,10 @@ export class GrupoComponent implements OnChanges {
             this.showConfirmation('Deseja realmente apagar este grupo?', () => {
               this.groupDB.remove(this.group)
               .then(() => {
-              });  
+              })
+              .catch(() => {
+        
+              });
             });                     
           }
         },
@@ -129,6 +135,8 @@ export class GrupoComponent implements OnChanges {
             this.celDB.remove(cel)
             .then(() => {
               this.mySumAllCallback();
+            }).catch(() => {
+        
             });
 
           }

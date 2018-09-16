@@ -2,14 +2,12 @@ import { Component } from '@angular/core';
 import {
   IonicPage,
   NavController,
-  NavParams,
   LoadingController,
   Loading,
   AlertController
 } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthProvider } from '../../providers/auth/auth';
-import { GaleriaPage } from '../galeria/galeria';
 import { EmailValidator } from '../../validators/email';
 
 @IonicPage()

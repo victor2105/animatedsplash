@@ -57,11 +57,15 @@ export class EditGroupPage {
       this.cels.add(cel)
         .then(ref => {
           this.showToast(cel);
+        },() => {
+        
         });
     } else {
       this.cels.update(cel)
         .then(ref => {
           this.showToast(cel);
+        }).catch(() => {
+        
         });
     }
   }

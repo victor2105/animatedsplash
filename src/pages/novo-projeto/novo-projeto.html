@@ -6,8 +6,8 @@
 -->
 <ion-header>
 
-  <ion-navbar color="primary">
-    <ion-title>Novo Projeto</ion-title>
+  <ion-navbar color="background()">
+    <ion-title>{{editMode ? 'Editar Projeto' : 'Novo Projeto'}}</ion-title>
     <ion-buttons end>
       <button ion-button navPush="NovoProjetoPage" >
         <ion-icon name="add" showWhen="android,windows"></ion-icon>
@@ -22,8 +22,14 @@
 
   <ion-item>
       <ion-label>Nome</ion-label>
-      <ion-input [(ngModel)]="project.name" placeholder="Planejamento Financeiro"></ion-input>
+      <ion-input [(ngModel)]="project.name" placeholder="ex: Planejamento Financeiro"></ion-input>
   </ion-item>
 
-  <button ion-button block clear [disabled]="disableButton" (click)="disableButton = true; addProject(project)">Salvar</button>
+  <ion-item>
+    <div class="colors">
+      <div *ngFor="let color of colors" [class]=" 'squar ' + color.class + ' ' + isSelected(color) " (click)="setBackgroundColor(color)"></div>   
+    </div>
+  </ion-item>
+
+  <button ion-button block clear [disabled]="disableButton" (click)="disableButton = true; finish(project)">Salvar</button>
 </ion-content>
