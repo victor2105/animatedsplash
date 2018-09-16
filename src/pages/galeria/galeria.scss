@@ -4,13 +4,17 @@ galeria {
         font-size: 2em;
         width: 1.6em;
         height: 1.6em;
-        background: #488aff;
         color: white;
         font-weight: bold;
         display: grid;
         align-items: center;
         justify-items: center;
-        border-radius: 0.5em;
+        border-radius: 0.2em;
+        box-shadow: 3px 1px 10px #ccc;
+    }
+
+    .light {
+        color: color($colors, dark);
     }
 
 }

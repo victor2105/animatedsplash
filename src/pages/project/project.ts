@@ -72,5 +72,13 @@ export class ProjectPage {
     });
   }
 
+  background() {
+    if(this.project.background){
+      return this.project.background;
+    }else{
+      return 'primary';
+    }
+  }
+
 
 }

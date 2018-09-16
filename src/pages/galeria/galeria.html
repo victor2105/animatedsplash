@@ -22,7 +22,7 @@
     <ion-item-divider color="light">Seus Projetos</ion-item-divider>
     <ion-list>
       <ion-item *ngFor="let project of projectList$ | async">
-        <div class="project-icon" item-start  (click)="openProject(project)">
+        <div [class]="'project-icon ' + (project.background ? project.background : 'primary')" item-start  (click)="openProject(project)">
           {{project.name[0]}}
         </div>
         <div (click)="openProject(project)">

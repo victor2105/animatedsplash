@@ -6,7 +6,7 @@
 -->
 <ion-header>
 
-  <ion-navbar color="primary">
+  <ion-navbar color="background()">
     <ion-title>{{editMode ? 'Editar Projeto' : 'Novo Projeto'}}</ion-title>
     <ion-buttons end>
       <button ion-button navPush="NovoProjetoPage" >
@@ -27,7 +27,7 @@
 
   <ion-item>
     <div class="colors">
-      <div *ngFor="let color of colors" [class]=" 'squar ' + color.class" (click)="setBackgroundColor(color)"></div>   
+      <div *ngFor="let color of colors" [class]=" 'squar ' + color.class + ' ' + isSelected(color) " (click)="setBackgroundColor(color)"></div>   
     </div>
   </ion-item>
 

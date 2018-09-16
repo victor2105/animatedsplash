@@ -22,16 +22,13 @@ export class NovoProjetoPage {
   disableButton = false;
 
   colors = [
-    { class: 'primary', value: '#488aff' },
-    { class: 'secondary', value: '#32db64' },
-    { class: 'danger', value: '#f53d3d' },
-    { class: 'light', value: '#f4f4f4' },
-    { class: 'dark', value: '#222222' }
+    { class: 'primary' },
+    { class: 'secondary' },
+    { class: 'danger' },
+    { class: 'purple' },
+    { class: 'light' },
+    { class: 'dark' }
   ];
-
-  getBackgroundColor(color){
-    return "background-color: "+color;";";
-  }
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -86,6 +83,10 @@ export class NovoProjetoPage {
   setBackgroundColor(color: any) {
     console.log(color);
     this.project.background = color.class;
+  }
+
+  isSelected(color: any) {
+    return color.class === this.project.background ? 'active' : '';
   }
 
 }
