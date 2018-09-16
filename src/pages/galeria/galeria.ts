@@ -38,7 +38,14 @@ export class GaleriaPage {
     this.navCtrl.push(NovoProjetoPage);
   }
 
+  editProject(project) {
+    this.navCtrl.push(NovoProjetoPage, { project: project })
+      .then(() => {
+      })
+      .catch(() => {
 
+      });
+  }
 
   openProject(project) {
     this.navCtrl.push(ProjectPage, {project: project});
@@ -50,9 +57,9 @@ export class GaleriaPage {
       title: `${this.project.name}`,
       buttons : [
         {
-          text: 'Abrir',
+          text: 'Editar',
           handler: () => {
-            this.openProject(this.project);
+            this.editProject(this.project);
           }
         },
         {

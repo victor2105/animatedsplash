@@ -37,9 +37,18 @@ $colors: (
   primary:    #488aff,
   secondary:  #32db64,
   danger:     #f53d3d,
+  v-purple:   #b972b0,
   light:      #f4f4f4,
   dark:       #222222
 );
+
+
+.primary { background: color($colors, primary); }
+.secondary {background: color($colors, secondary); }
+.danger { background: color($colors, danger); }
+.purple { background: color($colors, v-purple); }
+.light { background: color($colors, light); }
+.dark { background: color($colors, dark); }
 
 
 // App iOS Variables
