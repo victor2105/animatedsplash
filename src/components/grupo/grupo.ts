@@ -1,6 +1,5 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { ActionSheetController, NavParams, AlertController } from 'ionic-angular';
-import { ModalController } from 'ionic-angular';
+import { ActionSheetController, AlertController } from 'ionic-angular';
 import { Cel } from '../../models/cel';
 import { CelListService } from '../../services/cel-list/cel-list.service';
 import { Observable } from 'rxjs/Observable';
@@ -29,11 +28,10 @@ export class GrupoComponent implements OnChanges {
 
   public celList$: Observable<any[]>;
 
-  constructor(private modalCtrl: ModalController,
+  constructor(
     private actionSheet: ActionSheetController,
     private alertCtrl: AlertController,
-    private navCtrl: NavController,
-    private navParams: NavParams,
+    private navCtrl: NavController,    
     private groupDB: GroupListService,
     private celDB: CelListService) { }
 

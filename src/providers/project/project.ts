@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Project } from '../../models/projeto';
 
 /*
   Generated class for the ProjectProvider provider.

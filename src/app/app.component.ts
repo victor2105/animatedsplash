@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import { Platform, ModalController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { GaleriaPage } from '../pages/galeria/galeria';
-import { LoginPage } from '../pages/login/login';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AuthProvider } from '../providers/auth/auth';
 import { ProjectListService } from '../services/project-list/project-list.service';

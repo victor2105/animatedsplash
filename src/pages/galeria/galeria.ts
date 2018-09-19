@@ -1,10 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, List, ActionSheetController, AlertController } from 'ionic-angular';
-import { Project } from '../../models/projeto';
-import { ProjectProvider } from '../../providers/project/project';
+import { IonicPage, NavController, NavParams, ActionSheetController, AlertController } from 'ionic-angular';
 import { ProjectListService } from '../../services/project-list/project-list.service';
 import { Cel } from '../../models/cel';
-import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 import { ProjectPage } from '../project/project';
 import { NovoProjetoPage } from '../novo-projeto/novo-projeto';
