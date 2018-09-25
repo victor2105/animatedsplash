@@ -23,7 +23,7 @@ export class NovoProjetoPage {
     { class: 'primary' },
     { class: 'secondary' },
     { class: 'danger' },
-    { class: 'purple' },
+    { class: 'v-purple' },
     { class: 'light' },
     { class: 'dark' }
   ];
