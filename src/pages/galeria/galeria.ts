@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, List, ActionSheetController, AlertController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, List, ActionSheetController, AlertController, Content } from 'ionic-angular';
 import { Project } from '../../models/projeto';
 import { ProjectProvider } from '../../providers/project/project';
 import { ProjectListService } from '../../services/project-list/project-list.service';
@@ -16,6 +16,8 @@ import { AuthProvider } from '../../providers/auth/auth';
   templateUrl: 'galeria.html',
 })
 export class GaleriaPage {
+  @ViewChild (Content) content: Content;
+
 
   email: string;
   projectList$ : Observable<Cel[]> ;
@@ -35,20 +37,33 @@ export class GaleriaPage {
   }
 
   newProject(){
-    this.navCtrl.push(NovoProjetoPage);
+    this.navCtrl.push(NovoProjetoPage)
+    .then(() => {
+      this.content.resize();
+    })
+    .catch(() => {
+      this.content.resize();
+    });
   }
 
   editProject(project) {
     this.navCtrl.push(NovoProjetoPage, { project: project })
       .then(() => {
+        this.content.resize();
       })
       .catch(() => {
-
+        this.content.resize();
       });
   }
 
   openProject(project) {
-    this.navCtrl.push(ProjectPage, {project: project});
+    this.navCtrl.push(ProjectPage, {project: project})
+    .then(() => {
+      this.content.resize();
+    })
+    .catch(() => {
+      this.content.resize();
+    });
   }
 
   selectProject(project) {
@@ -70,9 +85,9 @@ export class GaleriaPage {
               
               this.projectCtrl.remove(this.project)
               .then(() => {
-
+                this.content.resize();
               }).catch(() => {
-        
+                this.content.resize();
               });  
             });                     
           }

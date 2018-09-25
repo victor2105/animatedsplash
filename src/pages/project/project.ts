@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ActionSheetController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, ActionSheetController, Content } from 'ionic-angular';
 import { Cel } from '../../models/cel';
 import { ProjectListService } from '../../services/project-list/project-list.service';
 import { ToastService } from '../../services/toast/toast.service';
@@ -21,6 +21,7 @@ import 'rxjs/add/operator/map';
 })
 export class ProjectPage {
   project: Cel;  
+  @ViewChild (Content) content: Content;
 
   groupList$ : Observable<any[]>;
 
@@ -42,7 +43,9 @@ export class ProjectPage {
         }))
       });
 
-      this.groupList$.subscribe();
+      this.groupList$.subscribe(() => {
+        this.content.resize();
+      });
 
   }
 
@@ -52,9 +55,12 @@ export class ProjectPage {
   saveProject(project: Cel) {
     this.projectDB.editProject(project)
       .then(() => {
+        this.content.resize();
         this.toast.show(`${project.name} saved!`);
         this.navCtrl.pop();
-      })
+      }, err => {
+        this.content.resize();
+      });
   }
 
   newGroup(name){
@@ -68,8 +74,10 @@ export class ProjectPage {
     
     this.groupDB.add(group)
     .then(key => {
-      
-    });
+      this.content.resize();
+    }, err => {
+        this.content.resize();
+      });
   }
 
   background() {
