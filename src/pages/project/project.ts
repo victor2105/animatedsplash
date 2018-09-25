@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ActionSheetController } from 'ionic-angular';
+import { Component, ViewChild, OnDestroy } from '@angular/core';
+import { IonicPage, NavController, NavParams, ActionSheetController, Content } from 'ionic-angular';
 import { Cel } from '../../models/cel';
 import { ProjectListService } from '../../services/project-list/project-list.service';
 import { ToastService } from '../../services/toast/toast.service';
 import { Observable } from 'rxjs/Observable';
 import { GroupListService } from '../../services/group-list/group-list.service';
 import 'rxjs/add/operator/map';
+import { Subscription } from '../../../node_modules/rxjs/internal/Subscription';
 
 /**
  * Generated class for the ProjectPage page.
@@ -19,8 +20,14 @@ import 'rxjs/add/operator/map';
   selector: 'page-project',
   templateUrl: 'project.html',
 })
-export class ProjectPage {
+export class ProjectPage implements OnDestroy {
+  
   project: Cel;  
+  groupListSub: Subscription;
+
+  groupList: any[] = []; 
+
+  @ViewChild (Content) content: Content;
 
   groupList$ : Observable<any[]>;
 
@@ -32,7 +39,6 @@ export class ProjectPage {
     private toast: ToastService) {
       this.project = this.navParams.get('project');
       
-      // db.list('/items', ref => ref.orderByChild('size').equalTo('large'))
       this.groupList$ = this.groupDB
       .getCelWithParent(this.project.key) // children of this.project
       .snapshotChanges()// key and values
@@ -42,11 +48,17 @@ export class ProjectPage {
         }))
       });
 
-      this.groupList$.subscribe();
+      this.groupListSub = this.groupList$.subscribe(list => {
+        console.log(list);
+        this.groupList = list;
+      });
 
   }
-
-  ionViewDidLoad() {
+  ngOnDestroy(): void {
+    if(this.groupListSub) this.groupListSub.unsubscribe();
+  }
+  ionViewWillEnter() {
+    this.content.resize();
   }
 
   saveProject(project: Cel) {
@@ -54,7 +66,8 @@ export class ProjectPage {
       .then(() => {
         this.toast.show(`${project.name} saved!`);
         this.navCtrl.pop();
-      })
+      }, err => {
+      });
   }
 
   newGroup(name){
@@ -67,9 +80,9 @@ export class ProjectPage {
     group.parent = this.project.key;
     
     this.groupDB.add(group)
-    .then(key => {
-      
-    });
+    .then(() => {
+    }, () => {
+      });
   }
 
   background() {
@@ -80,5 +93,7 @@ export class ProjectPage {
     }
   }
 
-
+  updateEvent($event) {
+    console.log("change");
+  }
 }

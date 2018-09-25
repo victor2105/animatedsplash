@@ -8,7 +8,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { GrupoComponent } from '../components/grupo/grupo';
 import { CelulaComponent } from '../components/celula/celula';
-import { CelulaModalPage } from '../pages/celula-modal/celula-modal';
 import { EntradaProvider } from '../providers/entrada/entrada';
 import { ProjectProvider } from '../providers/project/project';
 
@@ -17,7 +16,6 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { FIREBASE_CREDENTIALS } from './firebase.credentials';
 import { ProjectListService } from '../services/project-list/project-list.service';
 import { ToastService } from '../services/toast/toast.service';
-import { GaleriaPage } from '../pages/galeria/galeria';
 import { ProjectPage } from '../pages/project/project';
 import { NovoProjetoPage } from '../pages/novo-projeto/novo-projeto';
 import { GroupListService } from '../services/group-list/group-list.service';

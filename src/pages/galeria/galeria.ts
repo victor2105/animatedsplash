@@ -1,10 +1,7 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, List, ActionSheetController, AlertController } from 'ionic-angular';
-import { Project } from '../../models/projeto';
-import { ProjectProvider } from '../../providers/project/project';
+import { Component, ViewChild, OnDestroy, OnChanges } from '@angular/core';
+import { IonicPage, NavController, NavParams, ActionSheetController, AlertController, Content } from 'ionic-angular';
 import { ProjectListService } from '../../services/project-list/project-list.service';
 import { Cel } from '../../models/cel';
-import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 import { ProjectPage } from '../project/project';
 import { NovoProjetoPage } from '../novo-projeto/novo-projeto';
@@ -16,6 +13,9 @@ import { AuthProvider } from '../../providers/auth/auth';
   templateUrl: 'galeria.html',
 })
 export class GaleriaPage {
+  
+  @ViewChild (Content) content: Content;
+
 
   email: string;
   projectList$ : Observable<Cel[]> ;
@@ -31,11 +31,23 @@ export class GaleriaPage {
     private projectCtrl : ProjectListService)
   {
     this.email = authCtrl.getUserEmail();
+
+    this.projectCtrl.loadUserProjects(this.email);
+
     this.projectList$ = this.projectCtrl.getObservable();
+  
+  }
+
+  ionViewWillEnter() {
+    this.content.resize();
   }
 
   newProject(){
-    this.navCtrl.push(NovoProjetoPage);
+    this.navCtrl.push(NovoProjetoPage)
+    .then(() => {
+    })
+    .catch(() => {
+    });
   }
 
   editProject(project) {
@@ -43,12 +55,15 @@ export class GaleriaPage {
       .then(() => {
       })
       .catch(() => {
-
       });
   }
 
   openProject(project) {
-    this.navCtrl.push(ProjectPage, {project: project});
+    this.navCtrl.push(ProjectPage, {project: project})
+    .then(() => {
+    })
+    .catch(() => {
+    });
   }
 
   selectProject(project) {
@@ -70,9 +85,7 @@ export class GaleriaPage {
               
               this.projectCtrl.remove(this.project)
               .then(() => {
-
               }).catch(() => {
-        
               });  
             });                     
           }

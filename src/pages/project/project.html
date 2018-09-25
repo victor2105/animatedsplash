@@ -16,11 +16,11 @@
 <ion-content [class]="background()">
 
   <ion-slides>
-    <ion-slide *ngFor="let group of groupList$ | async">
-        <grupo [group]="group"></grupo>
+    <ion-slide *ngFor="let item of groupList">
+        <grupo [group]="item" (updateEvent)="updateEvent($event)"></grupo>
     </ion-slide>
     <ion-slide>
-      <button ion-button block (click)="newGroup('Novo Grupo')">Adicionar grupo</button>
+      <button ion-button style="margin-top: -3px;" [color]="background()" block (click)="newGroup('Novo Grupo')">Adicionar grupo</button>
     </ion-slide>
   </ion-slides>
     

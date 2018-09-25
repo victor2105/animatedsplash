@@ -1,6 +1,5 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { ActionSheetController, NavParams, AlertController } from 'ionic-angular';
-import { ModalController } from 'ionic-angular';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { ActionSheetController, AlertController } from 'ionic-angular';
 import { Cel } from '../../models/cel';
 import { CelListService } from '../../services/cel-list/cel-list.service';
 import { Observable } from 'rxjs/Observable';
@@ -9,6 +8,7 @@ import { NavController } from 'ionic-angular/navigation/nav-controller';
 import { EditGroupPage } from '../../pages/edit-group/edit-group';
 import { GroupListService } from '../../services/group-list/group-list.service';
 import 'rxjs/add/operator/map';
+import { updateDate } from '../../../node_modules/ionic-angular/umd/util/datetime-util';
 /**
  * Generated class for the GrupoComponent component.
  *
@@ -19,46 +19,56 @@ import 'rxjs/add/operator/map';
   selector: 'grupo',
   templateUrl: 'grupo.html'
 })
-export class GrupoComponent implements OnChanges {
+export class GrupoComponent implements OnInit {
+
+  
+  // @ViewChild (Content) content: Content;
 
   @Input() key: string = "-1";
   @Input() editar: boolean = false;
   @Input() group: Cel = new Cel();
 
+  @Output() updateEvent = new EventEmitter();
+
   editarTitulo: boolean;
 
   public celList$: Observable<any[]>;
 
-  constructor(private modalCtrl: ModalController,
+  constructor(
     private actionSheet: ActionSheetController,
     private alertCtrl: AlertController,
     private navCtrl: NavController,
-    private navParams: NavParams,
     private groupDB: GroupListService,
-    private celDB: CelListService) { }
+    private celDB: CelListService) {
 
-  ngOnChanges(changes: SimpleChanges): void {
+    }
+
+  ngOnInit() {
     this.celList$ = this.celDB
-      .getCelWithParent(this.group.key) // children of this.project
-      .snapshotChanges()  // key and values
-      .map(changes => {
-        return changes.map(c => ({
-          key: c.payload.key, ...c.payload.val()
-        }))
-      });
-    this.calculate();
+    .getCelWithParent(this.group.key) // children of this.group
+    .snapshotChanges()  // key and values
+    .map(changes => {
+      return changes.map(c => ({
+        key: c.payload.key, ...c.payload.val()
+      }))
+    });
+    this.celList$.subscribe(list => {
+      this.calculate(list);
+    });
   }
 
+
   newCel() {
-    this.navCtrl.push(NewCelPage, { parent: this.group.key, cel: null, callback: this.mySumAllCallback });
+    this.navCtrl.push(NewCelPage, { parent: this.group.key, cel: null });
   }
 
   editCel(cel) {
-    this.navCtrl.push(NewCelPage, { parent: this.group.key, cel: cel, callback: this.mySumAllCallback })
+    this.navCtrl.push(NewCelPage, { parent: this.group.key, cel: cel })
       .then(() => {
+        // this.content.resize();
       })
       .catch(() => {
-
+        // this.content.resize();
       });
   }
   
@@ -134,9 +144,7 @@ export class GrupoComponent implements OnChanges {
             // Delete the current cel
             this.celDB.remove(cel)
             .then(() => {
-              this.mySumAllCallback();
-            }).catch(() => {
-        
+            }).catch(() => {        
             });
 
           }
@@ -153,34 +161,24 @@ export class GrupoComponent implements OnChanges {
 
   editGroup() {
     this.navCtrl.push(EditGroupPage, { parent: this.group.parent, cel: this.group })
-  }
-
-  mySumAllCallback = () => {
-    return new Promise((resolve, reject) => {
-      let sum: number = 0;
-      this.celList$.forEach((array: Cel[]) => {
-        array.forEach((value: Cel, index: number, array: Cel[]) => {
-          sum = Number(sum) + Number(value.value);
-        })
-
-        this.group.value = sum;
-        this.groupDB.update(this.group);
-        return sum;
-      })
+    .then(() => {
+      // this.content.resize();
+      this.updateEvent.emit(null);
+    })
+    .catch(() => {
+      this.updateEvent.emit(null);
     });
   }
 
-  calculate() {
+  calculate(list) {
     let sum: number = 0;
-    this.celList$.forEach((array: Cel[]) => {
-      array.forEach((value: Cel, index: number, array: Cel[]) => {
-        sum = Number(sum) + Number(value.value);
-      })
+    
+    list.forEach((value: Cel, index: number, array: Cel[]) => {
+      sum = Number(sum) + Number(value.value);
+    });
 
-      this.group.value = sum;
-      this.groupDB.update(this.group);
-      return sum;
-    })
+    this.group.value = sum;
+    this.groupDB.update(this.group);
   }
 
 }
