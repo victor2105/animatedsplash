@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
-import { Platform, ModalController } from 'ionic-angular';
+import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { GaleriaPage } from '../pages/galeria/galeria';
-import { LoginPage } from '../pages/login/login';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AuthProvider } from '../providers/auth/auth';
 import { ProjectListService } from '../services/project-list/project-list.service';
@@ -19,7 +17,6 @@ export class MyApp {
     platform: Platform,
     statusBar: StatusBar,
     splashScreen: SplashScreen,
-    modalCtrl: ModalController,
     projectCtrl: ProjectListService,
     authCtrl: AuthProvider,
     afAuth: AngularFireAuth) {
@@ -27,7 +24,6 @@ export class MyApp {
       const authObserver = afAuth.authState.subscribe( user => {
         if (user) {
           authCtrl.email = user.email;
-          projectCtrl.loadUserProjects(user.email);
           this.rootPage = 'GaleriaPage';
           authObserver.unsubscribe();
         } else {

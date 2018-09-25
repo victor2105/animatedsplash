@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { ProjectProvider } from '../../providers/project/project';
 import { Cel } from '../../models/cel';
 import { ProjectListService } from '../../services/project-list/project-list.service';
 import { ToastService } from '../../services/toast/toast.service';
-import { GaleriaPage } from '../galeria/galeria';
 import { AuthProvider } from '../../providers/auth/auth';
 
 @IonicPage()
@@ -50,6 +48,12 @@ export class NovoProjetoPage {
   }
 
   finish(project: Cel) {
+    if(!project.name) {
+
+      this.toast.show(`Informe um nome para o projeto.`);
+      this.disableButton = false;
+      return;
+    }
     project.parent = this.authCtrl.getUserEmail();
     if(this.editMode){
       this.saveProject(project);

@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Cel } from '../../models/cel';
 import { ToastService } from '../../services/toast/toast.service';
-import { GaleriaPage } from '../galeria/galeria';
 import { CelListService } from '../../services/cel-list/cel-list.service';
 /**
  * Generated class for the NovoProjetoPage page.
@@ -23,8 +22,6 @@ export class NewCelPage {
 
   title: string;
   edit: boolean;
-
-  callback;
 
   disableButton = false;
 
@@ -53,11 +50,11 @@ export class NewCelPage {
   }
 
   ionViewWillEnter() {
-    this.callback = this.navParams.get("callback")
+    
   }
   ionViewWillLeave() {
-    this.callback();
-}
+      
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad NewCelPage');

@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController, Platform } from 'ionic-angular';
 import { Cel } from '../../models/cel';
-import { CelListService } from '../../services/cel-list/cel-list.service';
 
 /**
  * Generated class for the CelulaModalPage page.
@@ -23,8 +22,7 @@ export class CelulaModalPage {
     public platform: Platform,
     public navCtrl: NavController,
     public navParams: NavParams,
-    public viewCtrl: ViewController,
-    private celDB: CelListService) {
+    public viewCtrl: ViewController) {
       this.cel = this.navParams.data;
   }
 

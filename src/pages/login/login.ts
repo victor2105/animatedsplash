@@ -42,8 +42,18 @@ export class LoginPage {
       return;
     }
 
+    this.loading = this.loadingCtrl.create({
+      dismissOnPageChange: true,
+    });
+    this.loading.present();
+
     this.authData.loginEmailPassword(this.loginForm.value.email, this.loginForm.value.password)
       .then(authData => {
+
+        console.log(authData);
+        this.authData.email = authData.user.email;
+
+        this.loading.dismiss();
         this.navCtrl.setRoot('GaleriaPage');
       }, error => {
         this.loading.dismiss().then(() => {
@@ -60,9 +70,5 @@ export class LoginPage {
         });
       });
 
-    this.loading = this.loadingCtrl.create({
-      dismissOnPageChange: true,
-    });
-    this.loading.present();
   }
 }
