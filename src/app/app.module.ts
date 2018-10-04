@@ -27,6 +27,7 @@ import { LocalDatabaseProvider } from '../providers/local-database/local-databas
 import { AuthProvider } from '../providers/auth/auth';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { GaleriaPageModule } from '../pages/galeria/galeria.module';
+import { AdMobFree } from '@ionic-native/admob-free';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { GaleriaPageModule } from '../pages/galeria/galeria.module';
     CelListService,
     ToastService,
     LocalDatabaseProvider,
-    AuthProvider
+    AuthProvider,
+    AdMobFree
   ]
 })
 export class AppModule {}

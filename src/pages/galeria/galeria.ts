@@ -6,6 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import { ProjectPage } from '../project/project';
 import { NovoProjetoPage } from '../novo-projeto/novo-projeto';
 import { AuthProvider } from '../../providers/auth/auth';
+import { AdMobFree, AdMobFreeBannerConfig } from '@ionic-native/admob-free';
 
 @IonicPage()
 @Component({
@@ -28,7 +29,8 @@ export class GaleriaPage {
     private alertCtrl: AlertController,
     private actionSheet: ActionSheetController,
     public navParams: NavParams,
-    private projectCtrl : ProjectListService)
+    private projectCtrl : ProjectListService,
+    private admobFree: AdMobFree)
   {
     this.email = authCtrl.getUserEmail();
 
@@ -40,6 +42,7 @@ export class GaleriaPage {
 
   ionViewWillEnter() {
     this.content.resize();
+    this.showBanner();
   }
 
   newProject(){
@@ -121,4 +124,20 @@ export class GaleriaPage {
     prompt.present();
   }
 
+  public showBanner(){
+    const bannerConfig: AdMobFreeBannerConfig = {
+      // add your config here
+      // for the sake of this example we will just use the test config
+      isTesting: true,
+      autoShow: true
+      };
+      this.admobFree.banner.config(bannerConfig);
+      
+      this.admobFree.banner.prepare()
+        .then(() => {
+          // banner Ad is ready
+          // if we set autoShow to false, then we will need to call the show method here
+        })
+        .catch(e => console.log(e));
+  }
 }
